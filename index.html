@@ -10,30 +10,42 @@
     <div class="game-info">
       <h1 id="level" class="level">Level <span>1</span></h1>
       <h1 class="tag blink">Find your way out, or get lost in the fun!!!</h1>
-      <img onclick="openSetting()" class="setting" src="/img/settings.png" alt="settings">
-      
+      <img
+        onclick="openSetting()"
+        class="setting"
+        src="/img/settings.png"
+        alt="settings"
+      />
     </div>
-        <!-- setting overlay -->
-        <div id="setting-overlay" class="setting-overlay" onclick="closeSetting()" autocomplete="off"></div>
-    
-        <!-- settings box -->
-        <div id="setting-box" class="setting-box" autocomplete="off">
-          <img src="/img/shamlogo.png" alt="Shamaze3D Logo" srcset="" >
-          <p>Welcome to ShaMaze3D</p>
-          <h2>Game Settings</h2>
-          <p>Toggle the joystick position:</p>
-          <span class="close-btn" onclick="closeSetting()">X</span>
-        </div>
+    <!-- setting overlay -->
+    <div
+      id="setting-overlay"
+      class="setting-overlay"
+      onclick="closeSetting()"
+      autocomplete="off"
+    ></div>
+
+    <!-- settings box -->
+    <div id="setting-box" class="setting-box" autocomplete="off">
+      <img src="/img/shamlogo.png" alt="Shamaze3D Logo" srcset="" />
+      <p>Welcome to ShaMaze3D</p>
+      <h2>Game Settings</h2>
+      <p>Toggle the joystick position</p>
+      <label class="switch">
+        <input type="checkbox" />
+        <span class="slider round"></span>
+      </label>
+      <span class="close-btn" onclick="closeSetting()">X</span>
+    </div>
     <!-- Joystick -->
     <div class="spin hide"></div>
     <div class="joystick-container hide">
       <div id="shamstick" class="joystick">
         <img class="joystickred" src="img/joystick-base.png" />
-        <div id="stick1">
-        </div>
+        <div id="stick1"></div>
       </div>
     </div>
- 
+
     <!-- Add the images to the HTML file -->
     <img id="ball2" src="img/ball.png" style="display: none" />
     <img id="concrete" src="img/concrete.jpg" style="display: none" />
@@ -43,6 +55,7 @@
     <script src="js/keyboard.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/maze.js"></script>
+    <script src="demo.js"></script>
     <script>
       var ball2Image = new Image();
       ball2Image.src = document.getElementById("ball2").src;
@@ -364,7 +377,6 @@
       }
       update();
 
-     
       function closeSetting() {
         // Hide the popup overlay and box
         document.getElementById("setting-overlay").style.display = "none";
@@ -375,7 +387,44 @@
         document.getElementById("setting-overlay").style.display = "block";
         document.getElementById("setting-box").style.display = "block";
       }
-      
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the joystick element
+        const joystick = document.querySelector(".joystick-container");
+
+        // Get the checkbox element
+        const checkbox = document.querySelector("#checkbox");
+
+        // Add an event listener for when the checkbox is clicked
+        checkbox.addEventListener("click", function () {
+          // Check if the checkbox is checked
+          if (this.checked) {
+            // Change the position of the joystick to the right
+            joystick.style.left = "auto";
+            joystick.style.right = "160px";
+          } else {
+            // Change the position of the joystick back to the left
+            joystick.style.right = "auto";
+            joystick.style.left = "160px";
+          }
+        });
+      });
+      var checkbox = document.querySelector(".switch input");
+      checkbox.addEventListener("change", toggleJoystickPosition);
+      function toggleJoystickPosition() {
+        var joystickContainer = document.querySelector(".joystick-container");
+        var slideElement = document.querySelector(".spin");
+        if (checkbox.checked) {
+          joystickContainer.style.left = "auto";
+          joystickContainer.style.right = "160px";
+          slideElement.style.left = "auto";
+          slideElement.style.right = "160px";
+        } else {
+          joystickContainer.style.right = "auto";
+          joystickContainer.style.left = "160px";
+          slideElement.style.right = "auto";
+          slideElement.style.left = "160px";
+        }
+      }
     </script>
   </body>
 </html>
