@@ -6,7 +6,7 @@
 /* import fonts */
 @font-face {
   font-family: "marsh";
-  src: url("/fonts/marsh.otf") format("truetype");
+  src: url("assets/marsh.otf") format("truetype");
 }
 
 * {
@@ -141,7 +141,7 @@ body {
 
 /* Styling for the popup box */
 .setting-box {
-  display: flex;
+  display: none;
   position: fixed;
   top: 40%;
   left: 50%;

@@ -50,6 +50,8 @@
     <img id="ball2" src="img/ball.png" style="display: none" />
     <img id="concrete" src="img/concrete.jpg" style="display: none" />
     <img id="brick3" src="img/Brick.png" style="display: none" />
+    <audio id="hit-sound" src="assets/ball.mp3"></audio>
+
     <script src="js/Box2dWeb.min.js"></script>
     <script src="js/Three.js"></script>
     <script src="js/keyboard.js"></script>
@@ -118,6 +120,21 @@
               ((e.position.x = t),
               (e.position.y = n),
               wWorld.CreateBody(e).CreateFixture(i));
+
+              var listener = new Box2D.Dynamics.b2ContactListener();
+  listener.BeginContact = function(contact) {
+    var bodyA = contact.GetFixtureA().GetBody();
+    var bodyB = contact.GetFixtureB().GetBody();
+    if (bodyA === wBall || bodyB === wBall) {
+      var velocity = wBall.GetLinearVelocity().Length();
+      if (velocity > 4.8) { // Adjust the velocity threshold as needed
+        var hitSound = document.getElementById("hit-sound");
+        hitSound.currentTime = 0;
+        hitSound.play();
+      }
+    }
+  };
+  wWorld.SetContactListener(listener);
       }
       function generate_maze_mesh(e) {
         for (var i = new THREE.Geometry(), t = 0; t < e.dimension; t++)
@@ -166,6 +183,7 @@
           ),
           planeMesh.rotation.set(Math.PI / 2, 0, 0),
           scene.add(planeMesh);
+          // sound
       }
       function updatePhysicsWorld() {
         var e = wBall.GetLinearVelocity();
