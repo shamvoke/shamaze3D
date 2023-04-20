@@ -6,7 +6,7 @@
 /* import fonts */
 @font-face {
   font-family: "marsh";
-  src: url("assets/marsh.otf") format("truetype");
+  src: url("/assets/marsh.otf") format("truetype");
 }
 
 * {
@@ -153,7 +153,6 @@ body {
   padding: 20px;
   z-index: 4;
   color: #07fff9;
-  font-size: 16px;
   line-height: 1.5;
   text-align: center;
   flex-direction: column;
@@ -209,14 +208,15 @@ body {
   padding-top: 20px;
 }
 .setting-box h2 {
-  font-size: 48px;
+  font-size: 56px;
   font-weight: bold;
   margin-top: 0;
   color: #160fff;
   text-decoration: underline;
 }
 .setting-box p {
-  font-size: 22px;
+  font-size: 28px;
+  margin: 0;
 }
 /* Styling for the close button */
 .close-btn {
@@ -232,6 +232,7 @@ body {
   display: inline-block;
   width: 150px;
   height: 40px;
+  margin-top: 15px;
 }
 
 .switch input { 
@@ -248,8 +249,8 @@ body {
   right: 0;
   bottom: 0;
   background-color: #160fff;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .slider:before {
