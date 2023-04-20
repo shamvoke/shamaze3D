@@ -8,11 +8,22 @@
   </head>
   <body>
     <div class="game-info">
-      <h1 id="level">Level 1</h1>
+      <h1 id="level" class="level">Level <span>1</span></h1>
       <h1 class="tag blink">Find your way out, or get lost in the fun!!!</h1>
-      <img class="settings" src="/img/shamlogo.png" alt="settings">
+      <img onclick="openSetting()" class="setting" src="/img/settings.png" alt="settings">
+      
     </div>
-    <!-- <canvas id="game-canvas"></canvas> -->
+        <!-- setting overlay -->
+        <div id="setting-overlay" class="setting-overlay" onclick="closeSetting()" autocomplete="off"></div>
+    
+        <!-- settings box -->
+        <div id="setting-box" class="setting-box" autocomplete="off">
+          <img src="/img/shamlogo.png" alt="Shamaze3D Logo" srcset="" >
+          <p>Welcome to ShaMaze3D</p>
+          <h2>Game Settings</h2>
+          <p>Toggle the joystick position:</p>
+          <span class="close-btn" onclick="closeSetting()">X</span>
+        </div>
     <!-- Joystick -->
     <div class="spin hide"></div>
     <div class="joystick-container hide">
@@ -22,6 +33,7 @@
         </div>
       </div>
     </div>
+ 
     <!-- Add the images to the HTML file -->
     <img id="ball2" src="img/ball.png" style="display: none" />
     <img id="concrete" src="img/concrete.jpg" style="display: none" />
@@ -266,7 +278,7 @@
             ),
             document.body.appendChild(renderer.domElement),
             KeyboardJS.bind.axis("left", "right", "down", "up", onMoveKey),
-            KeyboardJS.bind.axis("h", "l", "j", "k", onMoveKey),
+            KeyboardJS.bind.axis("a", "d", "s", "w", onMoveKey),
             $(window).resize(onResize),
             (gameState = "initialize"),
             requestAnimationFrame(gameLoop);
@@ -351,6 +363,19 @@
           requestAnimationFrame(update);
       }
       update();
+
+     
+      function closeSetting() {
+        // Hide the popup overlay and box
+        document.getElementById("setting-overlay").style.display = "none";
+        document.getElementById("setting-box").style.display = "none";
+      }
+      function openSetting() {
+        // Show the popup overlay and box
+        document.getElementById("setting-overlay").style.display = "block";
+        document.getElementById("setting-box").style.display = "block";
+      }
+      
     </script>
   </body>
 </html>
