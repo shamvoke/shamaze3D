@@ -48,7 +48,7 @@ body {
   background: linear-gradient(to top right, #160fff, #07fff9);
   position: fixed;
   bottom: 200px;
-  left: 160px;
+  left: 158px;
   height: 303px;
   width: 303px;
   animation: spiner 3s linear infinite;
@@ -98,7 +98,7 @@ body {
 }
 .joystick-container {
   position: fixed;
-  bottom: 199px;
+  bottom: 200px;
   left: 160px;
   height: 300px;
   width: 300px;
