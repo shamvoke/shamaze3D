@@ -8,10 +8,9 @@
   initial-value: 132deg;
   inherits: false;
 }
-/* import fonts */
 @font-face {
   font-family: "marsh";
-  src: url("/assets/marsh.otf") format("truetype");
+  src: url("assets/marsh.otf") format("truetype");
 }
 
 * {
@@ -25,15 +24,13 @@ body {
   height: 100%;
   width: 100%;
   display: block;
-  touch-action: none; /* Disable touch events on the canvas */
+  touch-action: none;
 }
-/* CSS for the level and settings button */
 .game-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  /* background: linear-gradient(to top right, #160fff, #07fff9); */
   background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   color: #fff;
@@ -48,7 +45,6 @@ body {
   margin-right: 40px;
   animation: spiner 20s linear infinite;
 }
-/* CSS for the red box */
 .spin {
   background: linear-gradient(to top right, #160fff, #07fff9);
   position: fixed;
@@ -132,7 +128,6 @@ body {
   font-weight: bold;
   color: #07fff9;
 }
-/* Styling for the popup overlay */
 .setting-overlay {
   display: none;
   position: fixed;
@@ -143,8 +138,6 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 3;
 }
-
-/* Styling for the popup box */
 .setting-box {
   display: none;
   position: fixed;
@@ -223,7 +216,6 @@ body {
   font-size: 28px;
   margin: 0;
 }
-/* Styling for the close button */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -231,7 +223,6 @@ body {
   cursor: pointer;
   font-size: 48px;
 }
-/* toggle styling */
 .switch {
   position: relative;
   display: inline-block;
@@ -239,13 +230,11 @@ body {
   height: 40px;
   margin-top: 15px;
 }
-
 .switch input { 
   opacity: 0;
   width: 0;
   height: 0;
 }
-
 .slider {
   position: absolute;
   cursor: pointer;
@@ -257,7 +246,6 @@ body {
   -webkit-transition: .5s;
   transition: .5s;
 }
-
 .slider:before {
   position: absolute;
   content: "";
@@ -269,15 +257,12 @@ body {
   -webkit-transition: .4s;
   transition: .4s;
 }
-
 input:checked + .slider {
   background-color: #07fff9;
 }
-
 input:focus + .slider {
   box-shadow: 0 0 1px #07fff9;
 }
-
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
