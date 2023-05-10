@@ -112,10 +112,10 @@ body {
 }
 #stick1 {
   position: absolute;
-  height: 150px;
-  width: 150px;
-  left: 76px;
-  top: 76px;
+  height: 155px;
+  width: 155px;
+  left: 73px;
+  top: 73px;
   background: linear-gradient(to top right, #160fff, #07fff9);
   border-radius: 50%;
 }
