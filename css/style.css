@@ -35,13 +35,12 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 130px;
   z-index: 1;
 }
 .setting {
-  height: 60px;
+  height: 90px;
   margin-right: 40px;
-  animation: spiner 20s linear infinite;
 }
 /* CSS for the red box */
 .spin {
@@ -63,39 +62,32 @@ body {
   }
 }
 .tag {
-  color: #07fff9; /* Set the text color */
-  text-shadow: 0 0 10px #07fff9, 0 0 20px #07fff9, 0 0 30px #07fff9,
-    0 0 40px #07fff9, 0 0 50px #07fff9, 0 0 60px #07fff9, 0 0 70px #07fff9; /* Create the glow effect */
-  animation: glow 5s ease-in-out infinite alternate; /* Set the animation */
+  text-transform: uppercase;
+ background-image: linear-gradient(
+   -225deg,
+   #160fff 0%,
+   #07fff9 29%,
+   #07fff9 67%,
+   #160fff 100%
+ );
+ background-size: auto auto;
+ background-clip: border-box;
+ background-size: 200% auto;
+ color: #fff;
+ background-clip: text;
+ text-fill-color: transparent;
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ animation: textclip 10s linear infinite;
+ display: inline-block;
 }
 
-@keyframes glow {
-  from {
-    text-shadow: 0 0 10px #07fff9, 0 0 20px #07fff9, 0 0 30px #07fff9,
-      0 0 40px #07fff9, 0 0 50px #07fff9, 0 0 60px #07fff9, 0 0 70px #07fff9; /* Set the initial shadow */
-  }
-
-  to {
-    text-shadow: 0 0 20px #07fff9, 0 0 30px #07fff9, 0 0 40px #07fff9,
-      0 0 50px #07fff9, 0 0 60px #07fff9, 0 0 70px #07fff9, 0 0 80px #07fff9; /* Set the final shadow */
-  }
+@keyframes textclip {
+ to {
+   background-position: 200% center;
+ }
 }
 
-.blink {
-  animation: blinker 5s infinite;
-}
-
-@keyframes blinker {
-  from {
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 0.2;
-  }
-  to {
-    opacity: 0.8;
-  }
-}
 .joystick-container {
   position: fixed;
   bottom: 200px;
@@ -126,6 +118,7 @@ body {
 .level {
   font-weight: bold;
   color: #07fff9;
+  font-size: 54px;
 }
 /* Styling for the popup overlay */
 .setting-overlay {
@@ -135,7 +128,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 3;
 }
 
@@ -224,14 +217,21 @@ body {
   top: 10px;
   right: 25px;
   cursor: pointer;
-  font-size: 48px;
+  font-size: 88px;
+}
+.settingcard{
+  display: inline-block;
+  margin: 20px;
+  padding: 20px;
+  background-color: #5a5a5a;
+  border-radius: 20px;
 }
 /* toggle styling */
 .switch {
   position: relative;
   display: inline-block;
-  width: 150px;
-  height: 40px;
+  width: 155px;
+  height: 50px;
   margin-top: 15px;
 }
 
@@ -256,8 +256,8 @@ body {
 .slider:before {
   position: absolute;
   content: "";
-  height: 32px;
-  width: 26px;
+  height: 43px;
+  width: 30px;
   left: 4px;
   bottom: 4px;
   background-color: white;

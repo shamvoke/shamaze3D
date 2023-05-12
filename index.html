@@ -9,7 +9,7 @@
   <body>
     <div class="game-info">
       <h1 id="level" class="level">Level <span>1</span></h1>
-      <h1 class="tag blink">Find your way out, or get lost in the fun!!!</h1>
+      <h1 class="tag ">Find your way out, or get lost in the fun!!!</h1>
       <img
         onclick="openSetting()"
         class="setting"
@@ -17,29 +17,27 @@
         alt="settings"
       />
     </div>
-    <!-- setting overlay -->
     <div
       id="setting-overlay"
       class="setting-overlay"
       onclick="closeSetting()"
       autocomplete="off"
     ></div>
-
-    <!-- settings box -->
     <div id="setting-box" class="setting-box" autocomplete="off">
       <img src="img/shamlogo.png" alt="Shamaze3D Logo" srcset="" />
-      <p>Welcome to ShaMaze3D</p>
       <h2>Game Settings</h2>
+      <hr>
+    <div class="settingcard">
       <p>Toggle the joystick position</p>
       <label class="switch">
         <input type="checkbox" />
         <span class="slider round"></span>
       </label>
+    </div>
       <hr>
       <p>stay tuned for updates :)</p>
       <span class="close-btn" onclick="closeSetting()">X</span>
     </div>
-    <!-- Joystick -->
     <div class="spin hide"></div>
     <div class="joystick-container hide">
       <div id="shamstick" class="joystick">
@@ -47,13 +45,10 @@
         <div id="stick1"></div>
       </div>
     </div>
-
-    <!-- Add the images to the HTML file -->
     <img id="ball2" src="img/ball.png" style="display: none" />
     <img id="concrete" src="img/concrete.jpg" style="display: none" />
     <img id="brick3" src="img/Brick.png" style="display: none" />
     <audio id="hit-sound" src="assets/ball.ogg"></audio>
-
     <script src="js/Box2dWeb.min.js"></script>
     <script src="js/Three.js"></script>
     <script src="js/keyboard.js"></script>
@@ -66,13 +61,9 @@
       concreteImage.src = document.getElementById("concrete").src;
       var brick3Image = new Image();
       brick3Image.src = document.getElementById("brick3").src;
-
-      // Pass the Image object to the THREE.Texture constructor
       var ironTexture = new THREE.Texture(ball2Image);
       var planeTexture = new THREE.Texture(concreteImage);
       var brickTexture = new THREE.Texture(brick3Image);
-
-      // Make sure to update the textures after they are loaded
       ironTexture.needsUpdate = true;
       planeTexture.needsUpdate = true;
       brickTexture.needsUpdate = true;
@@ -397,31 +388,21 @@
       update();
 
       function closeSetting() {
-        // Hide the popup overlay and box
         document.getElementById("setting-overlay").style.display = "none";
         document.getElementById("setting-box").style.display = "none";
       }
       function openSetting() {
-        // Show the popup overlay and box
         document.getElementById("setting-overlay").style.display = "block";
         document.getElementById("setting-box").style.display = "block";
       }
       document.addEventListener("DOMContentLoaded", function () {
-        // Get the joystick element
         const joystick = document.querySelector(".joystick-container");
-
-        // Get the checkbox element
         const checkbox = document.querySelector("#checkbox");
-
-        // Add an event listener for when the checkbox is clicked
         checkbox.addEventListener("click", function () {
-          // Check if the checkbox is checked
           if (this.checked) {
-            // Change the position of the joystick to the right
             joystick.style.left = "auto";
             joystick.style.right = "160px";
           } else {
-            // Change the position of the joystick back to the left
             joystick.style.right = "auto";
             joystick.style.left = "160px";
           }
