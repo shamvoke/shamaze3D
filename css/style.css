@@ -8,7 +8,6 @@
   font-family: "marsh";
   src: url("/assets/marsh.otf") format("truetype");
 }
-
 * {
   font-family: "marsh", sans-serif;
 }
@@ -20,15 +19,13 @@ body {
   height: 100%;
   width: 100%;
   display: block;
-  touch-action: none; /* Disable touch events on the canvas */
+  touch-action: none;
 }
-/* CSS for the level and settings button */
 .game-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  /* background: linear-gradient(to top right, #160fff, #07fff9); */
   background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   color: #fff;
@@ -42,7 +39,6 @@ body {
   height: 90px;
   margin-right: 40px;
 }
-/* CSS for the red box */
 .spin {
   background: linear-gradient(to top right, #160fff, #07fff9);
   position: fixed;
@@ -63,31 +59,29 @@ body {
 }
 .tag {
   text-transform: uppercase;
- background-image: linear-gradient(
-   -225deg,
-   #160fff 0%,
-   #07fff9 29%,
-   #07fff9 67%,
-   #160fff 100%
- );
- background-size: auto auto;
- background-clip: border-box;
- background-size: 200% auto;
- color: #fff;
- background-clip: text;
- text-fill-color: transparent;
- -webkit-background-clip: text;
- -webkit-text-fill-color: transparent;
- animation: textclip 10s linear infinite;
- display: inline-block;
+  background-image: linear-gradient(
+    -225deg,
+    #160fff 0%,
+    #07fff9 29%,
+    #07fff9 67%,
+    #160fff 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  display: inline-block;
 }
-
 @keyframes textclip {
- to {
-   background-position: 200% center;
- }
+  to {
+    background-position: 200% center;
+  }
 }
-
 .joystick-container {
   position: fixed;
   bottom: 200px;
@@ -111,16 +105,14 @@ body {
   background: linear-gradient(to top right, #160fff, #07fff9);
   border-radius: 50%;
 }
-
 .joystickred {
   opacity: 0.8;
 }
 .level {
   font-weight: bold;
   color: #07fff9;
-  font-size: 54px;
+  font-size: 58px;
 }
-/* Styling for the popup overlay */
 .setting-overlay {
   display: none;
   position: fixed;
@@ -128,11 +120,14 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-image: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0),
+    rgba(0, 0, 0, 0.4)
+  );
+
   z-index: 3;
 }
-
-/* Styling for the popup box */
 .setting-box {
   display: none;
   position: fixed;
@@ -142,7 +137,7 @@ body {
   width: 650px;
   height: 1000px;
   background: #191c29;
-  border-radius: 10px;
+  border-radius: 30px;
   padding: 20px;
   z-index: 4;
   color: #07fff9;
@@ -158,7 +153,7 @@ body {
   right: 0;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 30px;
   background-image: linear-gradient(
     var(--rotate),
     #07fff9,
@@ -171,7 +166,7 @@ body {
 }
 .setting-box::after {
   position: absolute;
-  border-radius: 10px;
+  border-radius: 30px;
   content: "";
   top: 0%;
   left: 0;
@@ -182,12 +177,11 @@ body {
   margin: 0 auto;
   transform: scale(0.98);
   filter: blur(calc(var(--card-height) / 6));
-  background: #191c29;
+  background: #000000de;
   opacity: 1;
   transition: opacity 0.5s;
-  animation: spin 2.5s linear infinite;
+  animation: spin 5s linear infinite;
 }
-
 @keyframes spin {
   0% {
     --rotate: 0deg;
@@ -211,7 +205,6 @@ body {
   font-size: 28px;
   margin: 0;
 }
-/* Styling for the close button */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -219,14 +212,20 @@ body {
   cursor: pointer;
   font-size: 88px;
 }
-.settingcard{
+.settingcard {
   display: inline-block;
   margin: 20px;
   padding: 20px;
   background-color: #5a5a5a;
-  border-radius: 20px;
+  border-radius: 30px;
+  width: 80%;
+  height: 50%;
 }
-/* toggle styling */
+.toggle {
+  background-color: #191c29;
+  border-radius: 30px;
+  padding: 15px 0;
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -234,13 +233,11 @@ body {
   height: 50px;
   margin-top: 15px;
 }
-
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-
 .slider {
   position: absolute;
   cursor: pointer;
@@ -249,10 +246,9 @@ body {
   right: 0;
   bottom: 0;
   background-color: #160fff;
-  -webkit-transition: .5s;
-  transition: .5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
-
 .slider:before {
   position: absolute;
   content: "";
@@ -261,18 +257,15 @@ body {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
-
 input:checked + .slider {
   background-color: #07fff9;
 }
-
 input:focus + .slider {
   box-shadow: 0 0 1px #07fff9;
 }
-
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
