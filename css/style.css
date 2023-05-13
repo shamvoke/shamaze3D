@@ -9,7 +9,7 @@
   src: url("/assets/marsh.otf") format("truetype");
 }
 * {
-  font-family: "marsh", sans-serif;
+  font-family: "marsh", Georgia;
 }
 body {
   box-sizing: border-box;
@@ -44,9 +44,9 @@ body {
   position: fixed;
   bottom: 200px;
   left: 158px;
-  height: 303px;
-  width: 303px;
-  animation: spiner 3s linear infinite;
+  height: 304px;
+  width: 304px;
+  animation: spiner 2.5s linear infinite;
   border-radius: 50%;
 }
 @keyframes spiner {
