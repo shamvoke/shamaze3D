@@ -28,6 +28,10 @@
       <h2>Game Settings</h2>
     <div class="settingcard">
       <div class="stncard">
+        <h1>High Score</h1>
+        <p id="highScore"></p>
+      </div>
+      <div class="stncard">
       <h3>Toggle the joystick position</h3>
       <label class="switch">
         <input type="checkbox" />
@@ -36,10 +40,10 @@
     </div>
     <div class="stncard">
       <h3>How to Play</h3>
-      <p>Use the onscreen joystick, or use the keyboard arrow keys to navigate the ball out of the maze.</p>
+      <p>Use the onscreen joystick, or the keyboard arrow keys to navigate the ball out of the maze.</p>
     </div>
+    <p>stay tuned for updates ☺️ </p>
     </div>
-      <p>stay tuned for updates ☺️ </p>
       <span class="close-btn" onclick="closeSetting()">X</span>
     </div>
     <div class="spin hide"></div>
@@ -71,7 +75,6 @@
       ironTexture.needsUpdate = true;
       planeTexture.needsUpdate = true;
       brickTexture.needsUpdate = true;
-      var highScore = 1;
       var camera = void 0,
         scene = void 0,
         renderer = void 0,
@@ -217,46 +220,58 @@
           (light.position.z = camera.position.z - 3.6);
       }
       function gameLoop() {
-        switch (gameState) {
-          case "initialize":
-            ((maze = generateSquareMaze(mazeDimension))[mazeDimension - 1][
-              mazeDimension - 2
-            ] = !1),
-              createPhysicsWorld(),
-              createRenderWorld(),
-              camera.position.set(1, 1, 9),
-              light.position.set(1, 1, 1.3),
-              (light.intensity = 0);
-            var e = Math.floor((mazeDimension - 1) / 2 - 4);
-            $("#level").html("Level " + e), (gameState = "fade in");
-            break;
-          case "fade in":
-            (light.intensity += 0.1 * (1 - light.intensity)),
-              renderer.render(scene, camera),
-              Math.abs(light.intensity - 1) < 0.05 &&
-                ((light.intensity = 1.2), (gameState = "play"));
-            break;
-          case "play":
-            updatePhysicsWorld(),
-              updateRenderWorld(),
-              renderer.render(scene, camera);
-            var i = Math.floor(ballMesh.position.x + 0.5),
-              t = Math.floor(ballMesh.position.y + 0.5);
-            i == mazeDimension &&
-              t == mazeDimension - 2 &&
-              ((mazeDimension += 2), (gameState = "fade out"));
-            break;
-          case "fade out":
-            updatePhysicsWorld(),
-              updateRenderWorld(),
-              (light.intensity += 0.1 * (0 - light.intensity)),
-              renderer.render(scene, camera),
-              Math.abs(light.intensity - 0) < 0.1 &&
-                ((light.intensity = 0),
-                renderer.render(scene, camera),
-                (gameState = "initialize"));
-        }
-        requestAnimationFrame(gameLoop);
+      switch (gameState) {
+      case "initialize":
+      ((maze = generateSquareMaze(mazeDimension))[mazeDimension - 1][
+      mazeDimension - 2
+      ] = !1),
+      createPhysicsWorld(),
+      createRenderWorld(),
+      camera.position.set(1, 1, 9),
+      light.position.set(1, 1, 1.3),
+      (light.intensity = 0);
+      var e = Math.floor((mazeDimension - 1) / 2 - 4);
+      $("#level").html("Level " + e);
+      var highScore = localStorage.getItem("highScore");
+      if (highScore === null) {
+      highScore = e;
+      } else {
+      highScore = parseInt(highScore);
+      if (e > highScore) {
+      highScore = e;
+      }
+      }
+      localStorage.setItem("highScore", highScore);
+      $("#highScore").html("Current best: Level " + highScore);
+      gameState = "fade in";
+      break;
+      case "fade in":
+      (light.intensity += 0.1 * (1 - light.intensity)),
+      renderer.render(scene, camera),
+      Math.abs(light.intensity - 1) < 0.05 &&
+      ((light.intensity = 1.1), (gameState = "play"));
+      break;
+      case "play":
+      updatePhysicsWorld(),
+      updateRenderWorld(),
+      renderer.render(scene, camera);
+      var i = Math.floor(ballMesh.position.x + 0.5),
+      t = Math.floor(ballMesh.position.y + 0.5);
+      i == mazeDimension &&
+      t == mazeDimension - 2 &&
+      ((mazeDimension += 2), (gameState = "fade out"));
+      break;
+      case "fade out":
+      updatePhysicsWorld(),
+      updateRenderWorld(),
+      (light.intensity += 0.1 * (0 - light.intensity)),
+      renderer.render(scene, camera),
+      Math.abs(light.intensity - 0) < 0.1 &&
+      ((light.intensity = 0),
+      renderer.render(scene, camera),
+      (gameState = "initialize"));
+      }
+      requestAnimationFrame(gameLoop);
       }
       function onResize() {
         renderer.setSize(window.innerWidth, window.innerHeight),

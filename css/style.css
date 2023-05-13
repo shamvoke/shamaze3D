@@ -58,7 +58,6 @@ body {
   }
 }
 .tag {
-  text-transform: uppercase;
   background-image: linear-gradient(
     -225deg,
     #160fff 0%,
@@ -135,7 +134,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 650px;
-  height: 1000px;
+  height: 50vh;
   background: #191c29;
   border-radius: 30px;
   padding: 20px;
@@ -177,7 +176,7 @@ body {
   margin: 0 auto;
   transform: scale(0.98);
   filter: blur(calc(var(--card-height) / 6));
-  background: #000000e8;
+  background: #000000cb;
   opacity: 1;
   transition: opacity 0.5s;
   animation: spin 3s linear infinite;
@@ -197,12 +196,13 @@ body {
 .setting-box h2 {
   font-size: 56px;
   font-weight: bold;
-  margin-top: 0;
+  margin: 0;
   color: #160fff;
   text-decoration: underline;
 }
 .setting-box p{
-  font-size: 24px;
+  font-size: 42px;
+  margin: 0;
 }
 .close-btn {
   position: absolute;
@@ -215,10 +215,9 @@ body {
   display: inline-block;
   margin: 10px;
   padding: 10px;
-  background-color: #5a5a5a;
+  background: linear-gradient(to top right, #160fff, #07fff9);
   border-radius: 30px;
   width: 80%;
-  height: 50%;
 }
 .stncard {
   background-color: #191c29;
@@ -228,18 +227,21 @@ body {
 }
 .stncard p{
   color: #fff;
-  font-size: 22px;
+  font-size: 28px;
+  margin: 10px;
   font-family: 'Courier New', Courier, monospace;
 }
 .stncard h3{
-  font-size: 28px;
+  font-size: 34px;
+  margin: 5px;
 }
 .switch {
   position: relative;
   display: inline-block;
-  width: 155px;
+  width: 160px;
   height: 50px;
   margin-bottom: 15px;
+  border-radius: 30px;
 }
 .switch input {
   opacity: 0;
@@ -261,7 +263,7 @@ body {
   position: absolute;
   content: "";
   height: 43px;
-  width: 30px;
+  width: 35px;
   left: 4px;
   bottom: 4px;
   background-color: white;
