@@ -6,7 +6,7 @@
 /* import fonts */
 @font-face {
   font-family: "marsh";
-  src: url("assets/marsh.otf") format("truetype");
+  src: url("/assets/marsh.otf") format("truetype");
 }
 * {
   font-family: "marsh", sans-serif;
