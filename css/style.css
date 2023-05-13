@@ -3,7 +3,6 @@
   initial-value: 132deg;
   inherits: false;
 }
-/* import fonts */
 @font-face {
   font-family: "marsh";
   src: url("/assets/marsh.otf") format("truetype");
