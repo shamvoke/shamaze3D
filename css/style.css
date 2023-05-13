@@ -177,10 +177,10 @@ body {
   margin: 0 auto;
   transform: scale(0.98);
   filter: blur(calc(var(--card-height) / 6));
-  background: #000000de;
+  background: #000000e8;
   opacity: 1;
   transition: opacity 0.5s;
-  animation: spin 5s linear infinite;
+  animation: spin 3s linear infinite;
 }
 @keyframes spin {
   0% {
@@ -201,9 +201,8 @@ body {
   color: #160fff;
   text-decoration: underline;
 }
-.setting-box p {
-  font-size: 28px;
-  margin: 0;
+.setting-box p{
+  font-size: 24px;
 }
 .close-btn {
   position: absolute;
@@ -214,24 +213,33 @@ body {
 }
 .settingcard {
   display: inline-block;
-  margin: 20px;
-  padding: 20px;
+  margin: 10px;
+  padding: 10px;
   background-color: #5a5a5a;
   border-radius: 30px;
   width: 80%;
   height: 50%;
 }
-.toggle {
+.stncard {
   background-color: #191c29;
   border-radius: 30px;
-  padding: 15px 0;
+  padding: 5px 20px;
+  margin-bottom: 10px;
+}
+.stncard p{
+  color: #fff;
+  font-size: 22px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.stncard h3{
+  font-size: 28px;
 }
 .switch {
   position: relative;
   display: inline-block;
   width: 155px;
   height: 50px;
-  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .switch input {
   opacity: 0;
