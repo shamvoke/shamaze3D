@@ -42,10 +42,10 @@ body {
 .spin {
   background: linear-gradient(to top right, #160fff, #07fff9);
   position: fixed;
-  bottom: 200px;
-  left: 158px;
-  height: 304px;
-  width: 304px;
+  bottom: 190px;
+  left: 150px;
+  height: 322px;
+  width: 322px;
   animation: spiner 2.5s linear infinite;
   border-radius: 50%;
 }

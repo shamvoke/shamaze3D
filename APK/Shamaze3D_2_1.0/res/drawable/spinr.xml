@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate android:layout_width="fill_parent" android:layout_height="fill_parent" android:interpolator="@android:anim/linear_interpolator" android:drawable="@drawable/wheel" android:toDegrees="1440.0" android:pivotX="50.0%" android:pivotY="50.0%" android:repeatCount="infinite"
+  xmlns:android="http://schemas.android.com/apk/res/android" />
