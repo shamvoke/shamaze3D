@@ -120,7 +120,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70vw;
-  height: 60vh;
+  height: 60svh;
   background: #191c29;
   border-radius: 30px;
   z-index: 4;
@@ -199,6 +199,7 @@ body {
   background: linear-gradient(to top right, #160fff, #07fff9);
   border-radius: 30px;
   width: 90%;
+  margin: 1svh;
 }
 .stncard {
   background-color: #191c29;
@@ -207,12 +208,12 @@ body {
 .stncard p{
   color: #fff;
   font-size: 100%;
-  margin: 5px;
+  padding: .2svh;
   font-family: 'Courier New', Courier, monospace;
 }
 .stncard h3{
-  font-size: 110%;
-  margin: 1svh;
+  font-size: 100%;
+  margin: .5svh;
 }
 .switch {
   position: relative;
