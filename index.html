@@ -7,16 +7,16 @@
     <title>Shamaze</title>
   </head>
   <body>
-    <div class="game-info">
-      <h1 id="level" class="level">Level <span>1</span></h1>
-      <h1 class="tag ">Find your way out, or get lost in the fun!!!</h1>
+    <div class="bigsham">
+      <h1 id="level">Level <span>1</span></h1>
+      <p class="tag ">Find your way out, or get lost in the fun!!!</p>
       <img
         onclick="openSetting()"
         class="setting"
         src="img/settings.png"
         alt="settings"
       />
-    </div>
+    </div> 
     <div
       id="setting-overlay"
       class="setting-overlay"
@@ -49,8 +49,8 @@
     <div class="spin hide"></div>
     <div class="joystick-container hide">
       <div id="shamstick" class="joystick">
-        <img class="joystickred" src="img/joystick-base.png" />
-        <div id="stick1"></div>
+        <img class="shamstickbase" src="img/joystick-base.png" />
+        <div id="shamstickgear"></div>
       </div>
     </div>
     <img id="ball" src="img/ball.jpg" style="display: none" />
@@ -389,7 +389,7 @@
             document.addEventListener("touchend", r);
         }
       }
-      let joystick = new JoystickController("stick1", 180, 5);
+      let joystick = new JoystickController("shamstickgear", 180, 5);
       function update() {
         joystick.active &&
           (joystick.value.x > 0.5
