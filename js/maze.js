@@ -1,1 +1,33 @@
-function generateSquareMaze(r){var i=new Array(r);i.dimension=r;for(var n=0;n<r;n++){i[n]=new Array(r);for(var e=0;e<r;e++)i[n][e]=!0}return i=function r(i,n,e){for(i[n][e]=!1;;){if(directions=[],1<n&&1==i[n-2][e]&&directions.push([-1,0]),n<i.dimension-2&&1==i[n+2][e]&&directions.push([1,0]),1<e&&1==i[n][e-2]&&directions.push([0,-1]),e<i.dimension-2&&1==i[n][e+2]&&directions.push([0,1]),0==directions.length)return i;dir=directions[Math.floor(Math.random()*directions.length)],i[n+dir[0]][e+dir[1]]=!1,i=r(i,n+2*dir[0],e+2*dir[1])}}(i,1,1)}
+function generateSquareMaze(r) {
+  var i = new Array(r);
+  i.dimension = r;
+  for (var n = 0; n < r; n++) {
+    i[n] = new Array(r);
+    for (var e = 0; e < r; e++) i[n][e] = !0;
+  }
+  return (i = (function r(i, n, e) {
+    for (i[n][e] = !1; ;) {
+      if (
+        ((directions = []),
+          1 < n && 1 == i[n - 2][e] && directions.push([-1, 0]),
+          n < i.dimension - 2 && 1 == i[n + 2][e] && directions.push([1, 0]),
+          1 < e && 1 == i[n][e - 2] && directions.push([0, -1]),
+          e < i.dimension - 2 && 1 == i[n][e + 2] && directions.push([0, 1]),
+          0 == directions.length)
+      )
+        return i;
+      (dir = directions[Math.floor(Math.random() * directions.length)]),
+        (i[n + dir[0]][e + dir[1]] = !1),
+        (i = r(i, n + 2 * dir[0], e + 2 * dir[1]));
+    }
+  })(i, 1, 1));
+}
+var playStartSound = function() {
+  var startSound = document.getElementById("start");
+  startSound.currentTime = 0;
+  startSound.play();
+};
+
+if (window.onload || window.onbeforeunload) {
+  playStartSound();
+}

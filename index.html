@@ -2,14 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=1024, user-scalable=no" />
+    <meta name="viewport" content="width=1440, user-scalable=no" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Shamaze</title>
   </head>
-  <body>
+  <body onload="bree">
     <div class="bigsham">
       <h1 id="level">Level <span>1</span></h1>
-      <p class="tag ">Find your way out, or get lost in the fun!!!</p>
+      <p class="tag ">Find your way out, or get lost in the fun!</p>
       <img
         onclick="openSetting()"
         class="setting"
@@ -25,11 +25,14 @@
     ></div>
     <div id="setting-box" class="setting-box" autocomplete="off">
       <img src="img/shamlogo.png" alt="Shamaze3D Logo" srcset="" />
-      <h2>Game Settings</h2>
+      <h1>Game Settings</h1>
     <div class="settingcard">
       <div class="stncard">
-        <h1>High Score</h1>
-        <p id="highScore"></p>
+        <h3>High Score</h3>
+        <div class="score-container">
+          <p id="highScore"></p>
+          <img src="img/reset.png" alt="Reset" id="resetButton" onclick="confirmReset()">
+        </div>
       </div>
       <div class="stncard">
       <h3>Toggle the joystick position</h3>
@@ -42,21 +45,27 @@
       <h3>How to Play</h3>
       <p>Use the onscreen joystick, or the keyboard arrow keys to navigate the ball out of the maze.</p>
     </div>
+    <div class="stncard">
+      <h3>About</h3>
+      <p>Shamaze3D V3.4</p>
+    </div>
     <p>stay tuned for updates ☺️ </p>
     </div>
       <span class="close-btn" onclick="closeSetting()">X</span>
     </div>
-    <div class="spin hide"></div>
     <div class="joystick-container hide">
-      <div id="shamstick" class="joystick">
+      <div id="shamstick">
         <img class="shamstickbase" src="img/joystick-base.png" />
         <div id="shamstickgear"></div>
       </div>
     </div>
     <img id="ball" src="img/ball.jpg" style="display: none" />
-    <img id="concrete" src="img/concrete.jpg" style="display: none" />
-    <img id="brick" src="img/Brick.jpg" style="display: none" />
-    <audio id="hit-sound" src="assets/ball.ogg"></audio>
+    <img id="concrete" src="img/concrete1.jpg" style="display: none" />
+    <img id="brick" src="img/Brick.png" style="display: none" />
+    <audio id="hit" src="assets/ball.ogg"></audio>
+    <audio id="roll" src=""></audio>
+    <audio id="start" src="assets/start.wav"></audio>
+    <audio id="done" src="assets/done.wav"></audio>
     <script src="js/Box2dWeb.min.js"></script>
     <script src="js/Three.js"></script>
     <script src="js/keyboard.js"></script>
@@ -72,6 +81,7 @@
       var ironTexture = new THREE.Texture(ball2Image);
       var planeTexture = new THREE.Texture(concreteImage);
       var brickTexture = new THREE.Texture(brick3Image);
+      var doneSound = document.getElementById("done");
       ironTexture.needsUpdate = true;
       planeTexture.needsUpdate = true;
       brickTexture.needsUpdate = true;
@@ -99,6 +109,35 @@
         b2Vec2 = Box2D.Common.Math.b2Vec2,
         wWorld = void 0,
         wBall = void 0;
+        var rollSound = document.getElementById("roll");
+        var rolling = false;
+
+        function adjustSound(speed) {
+          var minSpeed = 0.5;
+          var maxSpeed = 4.5;
+          var minPitch = 0.1;
+          var maxPitch = 0.5;
+          var minVolume = 0.1;
+          var maxVolume = 0.2;
+
+          var pitch = mapRange(speed, minSpeed, maxSpeed, minPitch, maxPitch);
+          var volume = mapRange(speed, minSpeed, maxSpeed, minVolume, maxVolume);
+
+          rollSound.playbackRate = pitch;
+          rollSound.volume = volume;
+        }
+
+      function mapRange(value, inMin, inMax, outMin, outMax) {
+        return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+      }
+            function playRollSound() {
+        rollSound.currentTime = 0;
+        rollSound.play();
+      }
+      function stopRollSound() {
+        rollSound.pause();
+        rollSound.currentTime = 0;
+      }
       function createPhysicsWorld() {
         wWorld = new b2World(new b2Vec2(0, 0), !0);
         var e = new b2BodyDef();
@@ -120,20 +159,31 @@
               ((e.position.x = t),
               (e.position.y = n),
               wWorld.CreateBody(e).CreateFixture(i));
-
         var listener = new Box2D.Dynamics.b2ContactListener();
         listener.BeginContact = function(contact) {
           var bodyA = contact.GetFixtureA().GetBody();
           var bodyB = contact.GetFixtureB().GetBody();
           if (bodyA === wBall || bodyB === wBall) {
             var velocity = wBall.GetLinearVelocity().Length();
-            if (velocity > 4.8) {
-              var hitSound = document.getElementById("hit-sound");
+            if (velocity > 4.5) {
+              var hitSound = document.getElementById("hit");
               hitSound.currentTime = 0;
               hitSound.play();
             }
           }
         };
+        setInterval(function() {
+        var velocity = wBall.GetLinearVelocity().Length();
+        if (velocity > 0.6 && !rolling) {
+          adjustSound(velocity);
+          playRollSound();
+          rolling = true;
+          } else if (velocity < 0.5 && rolling) {
+            stopRollSound();
+            rolling = false;
+          }
+        }, 100);
+        rollSound.addEventListener('ended', playRollSound);
         wWorld.SetContactListener(listener);
       }
       function generate_maze_mesh(e) {
@@ -217,7 +267,7 @@
           (camera.position.z += 0.1 * (5 - camera.position.z)),
           (light.position.x = camera.position.x),
           (light.position.y = camera.position.y),
-          (light.position.z = camera.position.z - 3.6);
+          (light.position.z = camera.position.z - 3.5);
       }
       function gameLoop() {
       switch (gameState) {
@@ -227,8 +277,8 @@
       ] = !1),
       createPhysicsWorld(),
       createRenderWorld(),
-      camera.position.set(1, 1, 9),
-      light.position.set(1, 1, 1.3),
+      camera.position.set(1, 1, 10),
+      light.position.set(1, 1, 9),
       (light.intensity = 0);
       var e = Math.floor((mazeDimension - 1) / 2 - 4);
       $("#level").html("Level " + e);
@@ -243,6 +293,18 @@
       }
       localStorage.setItem("highScore", highScore);
       $("#highScore").html("Current best: Level " + highScore);
+      var resetScore = document.getElementById("resetButton");
+       // Add an event listener to the reset button
+      resetButton.addEventListener("click", confirmReset);
+      function confirmReset() {
+        if (confirm("Are you sure you want to reset your high score?")) {
+          resetHighScore();
+        }
+      }
+      function resetHighScore() {
+        localStorage.setItem("highScore", 0);
+        $("#highScore").html("High Score cleared");
+      };
       gameState = "fade in";
       break;
       case "fade in":
@@ -252,14 +314,17 @@
       ((light.intensity = 1.1), (gameState = "play"));
       break;
       case "play":
-      updatePhysicsWorld(),
-      updateRenderWorld(),
+      updatePhysicsWorld();
+      updateRenderWorld();
       renderer.render(scene, camera);
-      var i = Math.floor(ballMesh.position.x + 0.5),
-      t = Math.floor(ballMesh.position.y + 0.5);
-      i == mazeDimension &&
-      t == mazeDimension - 2 &&
-      ((mazeDimension += 2), (gameState = "fade out"));
+      var i = Math.floor(ballMesh.position.x + 0.5);
+      var t = Math.floor(ballMesh.position.y + 0.5);
+      if (i == mazeDimension && t == mazeDimension - 2) {
+        doneSound.currentTime = 0;
+        doneSound.play();
+        mazeDimension += 2;
+        gameState = "fade out";
+      }
       break;
       case "fade out":
       updatePhysicsWorld(),
@@ -389,7 +454,7 @@
             document.addEventListener("touchend", r);
         }
       }
-      let joystick = new JoystickController("shamstickgear", 180, 5);
+      let joystick = new JoystickController("shamstickgear", 220, 2);
       function update() {
         joystick.active &&
           (joystick.value.x > 0.5
@@ -419,10 +484,10 @@
         checkbox.addEventListener("click", function () {
           if (this.checked) {
             joystick.style.left = "auto";
-            joystick.style.right = "160px";
+            joystick.style.right = "16svw";
           } else {
             joystick.style.right = "auto";
-            joystick.style.left = "160px";
+            joystick.style.left = "16svw";
           }
         });
       });
@@ -430,17 +495,12 @@
       checkbox.addEventListener("change", toggleJoystickPosition);
       function toggleJoystickPosition() {
         var joystickContainer = document.querySelector(".joystick-container");
-        var slideElement = document.querySelector(".spin");
         if (checkbox.checked) {
           joystickContainer.style.left = "auto";
-          joystickContainer.style.right = "160px";
-          slideElement.style.left = "auto";
-          slideElement.style.right = "158px";
+          joystickContainer.style.right = "16svw";
         } else {
           joystickContainer.style.right = "auto";
-          joystickContainer.style.left = "160px";
-          slideElement.style.right = "auto";
-          slideElement.style.left = "158px";
+          joystickContainer.style.left = "16svw";
         }
       }
     </script>
