@@ -107,6 +107,8 @@
       var planeTexture = new THREE.Texture(concreteImage);
       var brickTexture = new THREE.Texture(brick3Image);
       var doneSound = document.getElementById("done");
+      var resetScore = document.getElementById("resetButton");
+      resetButton.addEventListener("click", confirmReset);
       ironTexture.needsUpdate = true;
       planeTexture.needsUpdate = true;
       brickTexture.needsUpdate = true;
@@ -290,6 +292,20 @@
           (light.position.y = camera.position.y),
           (light.position.z = camera.position.z - 3.5);
       }
+      function confirmReset(event) {
+        event.preventDefault();
+        if (confirm("Are you sure you want to reset your high score?")) {
+          resetHighScore();
+        }
+        return false;
+      }
+
+      function resetHighScore() {
+        localStorage.removeItem("highScore");
+        $("#highScore").html("High Score cleared!");
+        resetButton.removeEventListener("click", confirmReset);
+        resetButton.addEventListener("click", confirmReset);
+      }
       function gameLoop() {
         switch (gameState) {
           case "initialize":
@@ -314,24 +330,6 @@
             }
             localStorage.setItem("highScore", highScore);
             $("#highScore").html("Current best: Level " + highScore);
-            var resetScore = document.getElementById("resetButton");
-            if (!resetButton.hasEventListener) {
-              resetButton.addEventListener("click", confirmReset);
-              resetButton.hasEventListener = true;
-            }
-            function confirmReset(event) {
-              event.preventDefault();
-              resetButton.removeEventListener("click", confirmReset);
-              if (confirm("Are you sure you want to reset your high score?")) {
-                resetHighScore();
-              }
-              return false;
-            }
-            function resetHighScore() {
-              localStorage.removeItem("highScore");
-              $("#highScore").html("High Score cleared!");
-              resetButton.hasEventListener = false;
-            }
             gameState = "fade in";
             break;
           case "fade in":
