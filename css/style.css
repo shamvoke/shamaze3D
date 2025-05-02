@@ -3,17 +3,13 @@
   initial-value: 132deg;
   inherits: false;
 }
-@font-face {
-  font-family: "marsh";
-  src: url("/assets/marsh.otf") format("truetype");
-}
 * {
   padding: 0;
   margin: 0;
 }
 body {
   font-family: "Baloo 2", sans-serif;
-  font-size: 0.8rem;
+  font-size: 1rem;
   box-sizing: border-box;
   display: block;
   touch-action: none;
@@ -41,14 +37,20 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 7svh;
+  height: 8vh;
   color: #07fff9;
+  margin-top: 10px;
 }
 .tag {
-  font-size: 120%;
+  font-weight: bold;
   opacity: 0;
   display: inline-block;
   animation: blink 10s ease-out 2s;
+}
+#level {
+  background-color: rgba(0, 0, 0, 0.596);
+  border-radius: 10px;
+  padding: 0 2vh;
 }
 @keyframes blink {
   0%,
@@ -67,7 +69,7 @@ body {
   bottom: 10vh;
   left: 16vw;
   width: 18vh;
-  height: 18vh;
+  aspect-ratio: 1/1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,9 +81,9 @@ body {
 #shamstickgear {
   position: absolute;
   width: 55%;
-  height: 55%;
-  left: 22.5%;
-  top: 22.5%;
+  aspect-ratio: 1/1;
+  left: 23%;
+  top: 21%;
   background: linear-gradient(to top right, #160fff, #07fff9);
   border-radius: 50%;
   clip-path: circle(50%);
@@ -90,8 +92,8 @@ body {
     0 0 80px rgba(255, 255, 255, 0.2);
 }
 .shamstickbase {
-  width: 18svh;
-  height: 18svh;
+  width: 18vh;
+  aspect-ratio: 1/1;
   background: linear-gradient(to top right, #160fff, #07fff9);
   border-radius: 50%;
   border: 2px groove #07fff9;
@@ -112,7 +114,7 @@ body {
   );
 }
 .setting-box {
-  /* display: none; */
+  display: none;
   position: fixed;
   top: 40%;
   left: 50%;
@@ -169,21 +171,22 @@ body {
   }
 }
 .setting-box img {
-  height: 16vh;
-  padding-top: 2vh;
+  height: clamp(6rem, 16vh, 8rem);
+  padding-top: 20px;
 }
 .close-btn {
   position: absolute;
-  top: 3%;
-  right: 3%;
+  top: 0;
+  right: 2%;
   cursor: pointer;
-  font-size: 250%;
+  font-size: 1.5rem;
+  font-weight: bold ;
 }
 .settingcard {
   display: inline-block;
   background: linear-gradient(to top right, #160fff, #07fff9);
   border-radius: 10px;
-  margin: 1.2vh;
+  margin: 0 1.2vh 1.2vh 1.2vh;
   line-height: 1.2;
 }
 .stncard {
@@ -219,9 +222,9 @@ body {
 .switch {
   position: relative;
   display: inline-block;
-  width: 10svh;
-  height: 3svh;
-  margin: 0.5svh;
+  width: 10vh;
+  height: 3vh;
+  margin: 0.5vh;
 }
 .switch input {
   opacity: 0;
@@ -242,10 +245,10 @@ body {
 .slider:before {
   position: absolute;
   content: "";
-  height: 2.5svh;
-  width: 2.5svh;
-  left: 0.3svh;
-  bottom: 0.3svh;
+  height: 2.5vh;
+  width: 2.5vh;
+  left: 0.3vh;
+  bottom: 0.3vh;
   background-color: white;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -257,7 +260,7 @@ input:focus + .slider {
   box-shadow: 0 0 1px #07fff9;
 }
 input:checked + .slider:before {
-  -webkit-transform: translateX(1svh);
-  -ms-transform: translateX(1svh);
-  transform: translateX(7svh);
+  -webkit-transform: translateX(1vh);
+  -ms-transform: translateX(1vh);
+  transform: translateX(7vh);
 }
