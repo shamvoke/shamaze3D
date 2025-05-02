@@ -4,93 +4,98 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet">
     <title>Shamaze</title>
   </head>
   <body>
-    <div class="bigsham">
-      <h1 id="level">Level <span>1</span></h1>
-      <p class="tag">Find your way out, or get lost in the fun!!!</p>
-      <img
-        onclick="openSetting()"
-        class="setting"
-        src="img/settings.png"
-        alt="settings"
-      />
-    </div>
-    <div
-      id="setting-overlay"
-      class="setting-overlay"
-      onclick="closeSetting()"
-      autocomplete="off"
-    ></div>
-    <div id="setting-box" class="setting-box" autocomplete="off">
-      <img src="img/shamlogo.png" alt="Shamaze3D Logo" srcset="" />
-      <h1>Game Settings</h1>
-      <div class="settingcard">
-        <div class="stncard">
-          <h3>High Score</h3>
-          <div class="score-container">
-            <p id="highScore"></p>
-            <img src="img/reset.png" alt="Reset" id="resetButton" />
+    <div class="gamebox">
+      <div class="bigsham">
+        <h1 id="level">Level <span>1</span></h1>
+        <p class="tag">Find your way out, or get lost in the fun!!!</p>
+        <img
+          onclick="openSetting()"
+          class="setting"
+          src="img/settings.png"
+          alt="settings"
+        />
+      </div>
+      <div
+        id="setting-overlay"
+        class="setting-overlay"
+        onclick="closeSetting()"
+        autocomplete="off"
+      ></div>
+      <div id="setting-box" class="setting-box" autocomplete="off">
+        <img src="img/shamlogo.png" alt="Shamaze3D Logo" srcset="" />
+        <h1>Game Settings</h1>
+        <div class="settingcard">
+          <div class="stncard">
+            <h3>High Score</h3>
+            <div class="score-container">
+              <p id="highScore"></p>
+              <img src="img/reset.png" alt="Reset" id="resetButton" />
+            </div>
+          </div>
+          <div class="stncard">
+            <h3>Toggle the joystick position</h3>
+            <label class="switch"
+              ><input type="checkbox" /><span class="slider round"></span
+            ></label>
+          </div>
+          <div class="stncard">
+            <h3>How to Play</h3>
+            <ul>
+              <li><strong>Find the exit and escape the maze.</strong></li>
+              <li>
+                <strong>Onscreen Joystick: </strong>Drag the virtual joystick to
+                control the ball.
+              </li>
+              <li>
+                <strong>Keyboard: </strong>Use the arrow keys or W[up], A[left],
+                S[down], D[right].
+              </li>
+              <li>
+                <strong>TV Remote / Gamepad: </strong>Use the arrow keys to
+                navigate the ball
+              </li>
+            </ul>
+          </div>
+          <div class="stncard">
+            <h3>About</h3>
+            <p>Shamaze3D V3.4</p>
+            <p>stay tuned for Updates ☺️</p>
           </div>
         </div>
-        <div class="stncard">
-          <h3>Toggle the joystick position</h3>
-          <label class="switch"
-            ><input type="checkbox" /><span class="slider round"></span
-          ></label>
-        </div>
-        <div class="stncard">
-          <h3>How to Play</h3>
-          <ul>
-            <li><strong>Find the exit and escape the maze.</strong></li>
-            <li>
-              <strong>Onscreen Joystick: </strong>Drag the virtual joystick to
-              control the ball.
-            </li>
-            <li>
-              <strong>Keyboard: </strong>Use the arrow keys or W[up], A[left],
-              S[down], D[right].
-            </li>
-            <li>
-              <strong>TV Remote / Gamepad: </strong>Use the arrow keys to
-              navigate the ball
-            </li>
-          </ul>
-        </div>
-        <div class="stncard">
-          <h3>About</h3>
-          <p>Shamaze3D V3.4</p>
-        </div>
-        <h4>stay tuned for Updates ☺️</h4>
+        <span class="close-btn" onclick="closeSetting()">X</span>
       </div>
-      <span class="close-btn" onclick="closeSetting()">X</span>
-    </div>
-    <div class="joystick-container hide">
-      <div id="shamstick">
-        <img class="shamstickbase" src="img/joystick-base.png" />
-        <div id="shamstickgear"></div>
+      <div class="joystick-container hide">
+        <div id="shamstick">
+          <img class="shamstickbase" src="img/joystick-base.png" />
+          <div id="shamstickgear"></div>
+        </div>
       </div>
+      <img
+        id="ball"
+        class="highres"
+        src="img/ball.jpg"
+        style="display: none"
+      /><img
+        id="concrete"
+        class="highres"
+        src="img/concrete1.jpg"
+        style="display: none"
+      /><img
+        id="brick"
+        class="highres"
+        src="img/Brick.png"
+        style="display: none"
+      /><audio id="hit" src="assets/ball.ogg"></audio
+      ><audio id="roll" src=""></audio
+      ><audio id="start" src="assets/start.wav"></audio
+      ><audio id="done" src="assets/done.wav"></audio>
     </div>
-    <img
-      id="ball"
-      class="shamgraphics"
-      src="img/ball.jpg"
-      style="display: none"
-    /><img
-      id="concrete"
-      class="shamgraphics"
-      src="img/concrete1.jpg"
-      style="display: none"
-    /><img
-      id="brick"
-      class="shamgraphics"
-      src="img/Brick.png"
-      style="display: none"
-    /><audio id="hit" src="assets/ball.ogg"></audio
-    ><audio id="roll" src=""></audio
-    ><audio id="start" src="assets/start.wav"></audio
-    ><audio id="done" src="assets/done.wav"></audio>
     <script src="js/Box2dWeb.min.js"></script>
     <script src="js/Three.js"></script>
     <script src="js/keyboard.js"></script>
