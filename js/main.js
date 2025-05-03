@@ -1,4 +1,4 @@
-var ball2Image = new Image();
+      var ball2Image = new Image();
       ball2Image.src = document.getElementById("ball").src;
       var concreteImage = new Image();
       concreteImage.src = document.getElementById("concrete").src;
@@ -7,12 +7,12 @@ var ball2Image = new Image();
       var ironTexture = new THREE.Texture(ball2Image);
       var planeTexture = new THREE.Texture(concreteImage);
       var brickTexture = new THREE.Texture(brick3Image);
-      var doneSound = document.getElementById("done");
-      var resetScore = document.getElementById("resetButton");
-      resetButton.addEventListener("click", confirmReset);
       ironTexture.needsUpdate = true;
       planeTexture.needsUpdate = true;
       brickTexture.needsUpdate = true;
+      var doneSound = document.getElementById("done");
+      var resetScore = document.getElementById("resetButton");
+      resetButton.addEventListener("click", confirmReset);
       var camera = void 0,
         scene = void 0,
         renderer = void 0,
@@ -396,36 +396,26 @@ var ball2Image = new Image();
           requestAnimationFrame(update);
       }
       update();
-      function closeSetting() {
-        document.getElementById("setting-overlay").style.display = "none";
-        document.getElementById("setting-box").style.display = "none";
-      }
-      function openSetting() {
-        document.getElementById("setting-overlay").style.display = "block";
-        document.getElementById("setting-box").style.display = "block";
-      }
-      document.addEventListener("DOMContentLoaded", function () {
-        const joystick = document.querySelector(".joystick-container");
-        const checkbox = document.querySelector("#checkbox");
-        checkbox.addEventListener("click", function () {
-          if (this.checked) {
-            joystick.style.left = "auto";
-            joystick.style.right = "16svw";
-          } else {
-            joystick.style.right = "auto";
-            joystick.style.left = "16svw";
-          }
-        });
+      const toggleSettings = (show) =>
+        ["setting-overlay", "setting-box"].forEach(id =>
+          document.getElementById(id).style.display = show ? "block" : "none"
+        );
+      // Get the checkboxes and the joystick container
+      const joystickEnable = document.getElementById("JoystickEnable");
+      const joystickPosition = document.getElementById("joystickPosition");
+      const joystickContainer = document.querySelector(".joystick-container");
+
+      // Toggle visibility
+      joystickEnable.addEventListener("change", () => {
+        joystickContainer.style.display = joystickEnable.checked ? "flex" : "none";
       });
-      var checkbox = document.querySelector(".switch input");
-      checkbox.addEventListener("change", toggleJoystickPosition);
-      function toggleJoystickPosition() {
-        var joystickContainer = document.querySelector(".joystick-container");
-        if (checkbox.checked) {
-          joystickContainer.style.left = "auto";
-          joystickContainer.style.right = "16svw";
-        } else {
-          joystickContainer.style.right = "auto";
-          joystickContainer.style.left = "16svw";
-        }
-      }
+
+      // Toggle left/right position
+      joystickPosition.addEventListener("change", () => {
+        Object.assign(joystickContainer.style, 
+          joystickPosition.checked
+            ? { left: "auto", right: "16vw" }
+            : { left: "16vw", right: "auto" }
+        );
+      });
+   

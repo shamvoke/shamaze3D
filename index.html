@@ -3,10 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="" />
+    <meta name="description" content="Sham Maze" />
+    <meta name="author" content="Sham Maze" />
+    <meta name="keywords" content="Sham Maze, Maze Game" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap"
+      rel="stylesheet"
+    />
     <title>Shamaze</title>
   </head>
   <body>
@@ -15,7 +21,7 @@
         <h1 id="level">Level <span>1</span></h1>
         <p class="tag">Find your way out, or get lost in the fun!!!</p>
         <img
-          onclick="openSetting()"
+          onclick="toggleSettings(true)"
           class="setting"
           src="img/settings.png"
           alt="settings"
@@ -24,7 +30,6 @@
       <div
         id="setting-overlay"
         class="setting-overlay"
-        onclick="closeSetting()"
         autocomplete="off"
       ></div>
       <div id="setting-box" class="setting-box" autocomplete="off">
@@ -39,9 +44,15 @@
             </div>
           </div>
           <div class="stncard">
-            <h3>Toggle the joystick position</h3>
+            <h3>Joystick Settings</h3>
+            <p>Show/Hide Joystick</p>
+            <label class="switch">
+              <input type="checkbox" id="JoystickEnable">
+              <span class="slider"></span>
+            </label>
+            <p>Toggle Joystick position</p>
             <label class="switch"
-              ><input type="checkbox" /><span class="slider round"></span
+              ><input type="checkbox" id="joystickPosition"/><span class="slider round"></span
             ></label>
           </div>
           <div class="stncard">
@@ -68,7 +79,7 @@
             <p>stay tuned for Updates ☺️</p>
           </div>
         </div>
-        <span class="close-btn" onclick="closeSetting()">X</span>
+        <span class="close-btn" onclick="toggleSettings(false)">X</span>
       </div>
       <div class="joystick-container hide">
         <div id="shamstick">
@@ -77,16 +88,19 @@
         </div>
       </div>
       <img
+      rel="preload"
         id="ball"
         class="highres"
         src="img/ball.jpg"
         style="display: none"
       /><img
+      rel="preload"
         id="concrete"
         class="highres"
         src="img/concrete1.jpg"
         style="display: none"
       /><img
+      rel="preload"
         id="brick"
         class="highres"
         src="img/Brick.png"
@@ -95,12 +109,12 @@
       ><audio id="roll" src=""></audio
       ><audio id="start" src="assets/start.wav"></audio
       ><audio id="done" src="assets/done.wav"></audio>
-      </main>
+    </main>
     <script src="js/Box2dWeb.min.js"></script>
     <script src="js/Three.js"></script>
     <script src="js/keyboard.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/maze.js"></script>
-    <script src="js/main.js"> </script>
+    <script src="js/main.js"></script>
   </body>
 </html>
