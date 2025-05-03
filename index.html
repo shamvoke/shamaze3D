@@ -16,6 +16,28 @@
     <title>Shamaze</title>
   </head>
   <body>
+    <img
+      rel="preload"
+      id="ball"
+      class="hd"
+      src="img/ball.jpg"
+      style="display: none"
+    /><img
+      rel="preload"
+      id="concrete"
+      class="hd"
+      src="img/concrete.jpg"
+      style="display: none"
+    /><img
+      rel="preload"
+      id="brick"
+      class="hd"
+      src="img/Brick.png"
+      style="display: none"
+    /><audio id="hit" src="assets/ball.ogg"></audio
+    ><audio id="roll" src=""></audio
+    ><audio id="start" src="assets/start.wav"></audio
+    ><audio id="done" src="assets/done.wav"></audio>
     <main class="gamebox">
       <div class="bigsham">
         <h1 id="level">Level <span>1</span></h1>
@@ -47,12 +69,14 @@
             <h3>Joystick Settings</h3>
             <p>Show/Hide Joystick</p>
             <label class="switch">
-              <input type="checkbox" id="JoystickEnable">
+              <input type="checkbox" id="JoystickEnable" />
               <span class="slider"></span>
             </label>
             <p>Toggle Joystick position</p>
             <label class="switch"
-              ><input type="checkbox" id="joystickPosition"/><span class="slider round"></span
+              ><input type="checkbox" id="joystickPosition" /><span
+                class="slider round"
+              ></span
             ></label>
           </div>
           <div class="stncard">
@@ -75,7 +99,7 @@
           </div>
           <div class="stncard">
             <h3>About</h3>
-            <p>Shamaze3D V3.4</p>
+            <p>Shamaze3D V3.6.0</p>
             <p>stay tuned for Updates ☺️</p>
           </div>
         </div>
@@ -87,28 +111,6 @@
           <div id="shamstickgear"></div>
         </div>
       </div>
-      <img
-      rel="preload"
-        id="ball"
-        class="highres"
-        src="img/ball.jpg"
-        style="display: none"
-      /><img
-      rel="preload"
-        id="concrete"
-        class="highres"
-        src="img/concrete1.jpg"
-        style="display: none"
-      /><img
-      rel="preload"
-        id="brick"
-        class="highres"
-        src="img/Brick.png"
-        style="display: none"
-      /><audio id="hit" src="assets/ball.ogg"></audio
-      ><audio id="roll" src=""></audio
-      ><audio id="start" src="assets/start.wav"></audio
-      ><audio id="done" src="assets/done.wav"></audio>
     </main>
     <script src="js/Box2dWeb.min.js"></script>
     <script src="js/Three.js"></script>
