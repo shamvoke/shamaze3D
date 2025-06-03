@@ -29,6 +29,7 @@ body {
 }
 .hd {
   image-rendering: crisp-edges;
+  display: none;
 }
 .bigsham {
   display: flex;
@@ -203,8 +204,8 @@ body {
   display: flex;
   align-items: center;
 }
-#resetButton {
-  height: 3.6vh;
+#resetBtn {
+  height: 4vh;
   padding: 0.1vh;
   margin-left: 1vh;
 }

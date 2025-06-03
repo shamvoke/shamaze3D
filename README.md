@@ -15,12 +15,13 @@ Sham Maze 3D is a creative remix of the brilliant original game [Astray](https:/
 - 🌆 Textures and theme tweaks
 - 🔊 Sounds
 - 🎨 Visual and layout enhancements
+- 🤖 Compiled android apk
 - 💡 More coming soon...
 ---
 
 ## 🧩 Gameplay
 
-- Use **WASD** or arrow keys to move (or use the joystick on mobile!)
+- Use the keys **W(up),A(left),S(right) & D(down)** or arrow keys to move (or use the joystick on mobile!)
 - Navigate through the ever growing maze in search of the exit
 - It's not timed... but your pride is on the line 😎
 
@@ -29,23 +30,23 @@ Sham Maze 3D is a creative remix of the brilliant original game [Astray](https:/
 ## 📦 Tech Stack
 
 - 🕸️ HTML + CSS + JavaScript
-- 🧱 [three.js](https://threejs.org/) for the 3D rendering
+- 🧱 [three.js](https://threejs.org/) for 3D rendering
 - 🌀 [box2d.js](https://github.com/kripken/box2d.js) for physics-based collision detection
 
 ---
 
 ## Screenshot
 
-![Sham Maze 3D Screenshot](/img/shamaze.jpg)
+![[Sham Maze 3D Screenshot]](/img/sham-maze.jpg)
 
 ---
 
 ## 🧑‍🎨 Credits
 
-- Core game logic originally created by [wwwtyro](https://github.com/wwwtyro/Astray) under MIT License
+- Core game logic originally created by [wwwtyro](https://github.com/wwwtyro/Astray)
 
 ---
 
 ## 🛠️ Want to Tweak It?
 
-Sure! Clone or download the code:❤️
+Sure! Fork or download the code:❤️
