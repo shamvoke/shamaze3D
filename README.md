@@ -35,7 +35,7 @@ Sham Maze 3D is a creative remix of the brilliant original game [Astray](https:/
 
 ---
 
-## Screenshot
+## Screenshots
 
 ![[Sham Maze 3D Screenshot]](/img/sham-maze.jpg)
 
