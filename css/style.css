@@ -1,276 +1,371 @@
-@property --rotate {
-  syntax: "<angle>";
-  initial-value: 132deg;
-  inherits: false;
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
+
+:root {
+    --primary-color: #07fff9; /* Cyan */
+    --secondary-color: #007bff; /* Electric Blue */
+    --dark-bg: #0a0a0a; /* Near Black */
+    --main-bg: #0d1117; /* Deep Space Blue */
+    --text-color: #e0e0e0; /* Light Gray */
+    --glass-border: rgba(100, 200, 255, 0.18); /* Subtle White/Blue */
+    --glass-bg: rgba(0, 0, 0, 0.3); /* Transparent Dark Blue */
+    --glow-color: #07fff9; /* Cyan */
+    --warning-color: #ff073a; /* Neon Red */
+}
+
 * {
-  padding: 0;
-  margin: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 body {
-  font-family: "Baloo 2", sans-serif;
-  font-size: 2rem;
-  box-sizing: border-box;
-  display: block;
-  touch-action: none;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+    font-family: 'Emilys Candy', cursive; /* Use Emilys Candy everywhere */
+    background-color: var(--main-bg);
+    color: var(--text-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    touch-action: none;
 }
-.gamebox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+
+/* Style for the Three.js canvas */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Ensure canvas is behind UI */
 }
+
 .hd {
-  image-rendering: crisp-edges;
-  display: none;
-}
-.bigsham {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  color: #07fff9;
-  padding: 10px;
-}
-.tag {
-  font-weight: bold;
-  opacity: 0;
-  display: inline-block;
-  animation: blink 10s ease-out 2s;
-}
-#level {
-  background-color: rgba(0, 0, 0, 0.596);
-  border-radius: 10px;
-  padding: 0 15px;
-  min-width: 110px;
-}
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-.setting {
-  height: 6.5vh;
-}
-.joystick-container {
-  position: fixed;
-  bottom: 10vh;
-  left: 16vw;
-  width: 18vh;
-  aspect-ratio: 1/1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-#shamstick {
-  position: absolute;
-}
-#shamstickgear {
-  position: absolute;
-  width: 55%;
-  aspect-ratio: 1/1;
-  left: 23%;
-  top: 21%;
-  background: linear-gradient(to top right, #160fff, #07fff9);
-  border-radius: 50%;
-  clip-path: circle(50%);
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5),
-    0 0 20px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.5),
-    0 0 80px rgba(255, 255, 255, 0.2);
-}
-.shamstickbase {
-  width: 18vh;
-  aspect-ratio: 1/1;
-  background: linear-gradient(to top right, #160fff, #07fff9);
-  border-radius: 50%;
-  border: 2px groove #07fff9;
-}
-.setting-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  background-image: linear-gradient(
-    to bottom,
-    rgb(0, 0, 0),
-    rgb(0, 0, 0),
-    rgba(0, 0, 0, 0.384)
-  );
-}
-.setting-box {
-  display: none;
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #191c29;
-  border-radius: 10px;
-  z-index: 4;
-  color: #07fff9;
-  text-align: center;
-  flex-direction: column;
-  align-items: center;
-}
-.setting-box::before {
-  content: "";
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background-image: linear-gradient(
-    var(--rotate),
-    #07fff9,
-    #3c67e3 43%,
-    #160fff
-  );
-  position: absolute;
-  z-index: -1;
-  animation: spin 3s linear infinite;
-}
-.setting-box::after {
-  position: absolute;
-  border-radius: 10px;
-  content: "";
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-  transform: scale(0.98);
-  filter: blur(calc(var(--card-height) / 6));
-  background: #000000cc;
-  opacity: 1;
-  transition: opacity 0.5s;
-  animation: spin 3s linear infinite;
-}
-@keyframes spin {
-  0% {
-    --rotate: 0deg;
-  }
-  100% {
-    --rotate: 360deg;
-  }
-}
-.setting-box img {
-  height: clamp(6rem, 16vh, 8rem);
-  padding-top: 20px;
-}
-.close-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0 15px;
-  cursor: pointer;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-.settingcard {
-  display: inline-block;
-  background: linear-gradient(to top right, #160fff, #07fff9);
-  border-radius: 10px;
-  margin: 0 1.2vh 1.2vh 1.2vh;
-  line-height: 1.2;
-}
-.stncard {
-  background-color: #191c29;
-  border-radius: 10px;
-  margin: 5px;
-  padding: 2px 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.score-container {
-  display: flex;
-  align-items: center;
-}
-#resetBtn {
-  height: 4vh;
-  padding: 0.1vh;
-  margin-left: 1vh;
-}
-.stncard p {
-  color: #fff;
-}
-.stncard ul {
-  list-style-type: none;
-  color: #c5c5c5;
-  text-align: left;
-}
-.stncard li strong {
-  font-weight: bold;
-  color: #fff;
-}
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 10vh;
-  height: 3vh;
-  margin: 0.5vh;
-}
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #160fff;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-}
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 2.5vh;
-  width: 2.5vh;
-  left: 0.3vh;
-  bottom: 0.3vh;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-input:checked + .slider {
-  background-color: #07fff9;
-}
-input:focus + .slider {
-  box-shadow: 0 0 1px #07fff9;
-}
-input:checked + .slider:before {
-  -webkit-transform: translateX(1vh);
-  -ms-transform: translateX(1vh);
-  transform: translateX(7vh);
-}
-@media (min-width: 768px) {
-  .joystick-container {
     display: none;
-  }
-  body {
+}
+
+.game-container {
+    position: fixed; /* Overlay the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push header to top, joystick to bottom */
+    align-items: center; /* Center items horizontally */
+    z-index: 1; /* Ensure it's above the canvas */
+}
+
+.game-header {
+    width: 100%; /* Take full width of game-container */
+    display: flex;
+    justify-content: space-between; /* Level text left, settings icon right */
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    z-index: 10; /* Ensure header is above other UI elements if needed */
+    box-sizing: border-box;
+}
+
+.game-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+.level-container {
+    background-color: var(--glass-bg);
+    border-radius: 10px;
+    padding: 5px 15px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Adjusted font size */
+    text-shadow: 0 0 5px var(--glow-color);
+    border: 1px solid var(--glass-border);
+}
+
+.settings-button-container {
+    z-index: 11;
+}
+
+.glass-button {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: var(--primary-color);
     font-size: 1rem;
-  }
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.glass-button:focus,
+.close-button:focus,
+.switch input:focus {
+    outline: none;
+}
+
+.glass-button img {
+    height: 30px; /* Increased image size */
+    filter: drop-shadow(0 0 5px var(--glow-color));
+}
+
+/* Settings Panel */
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: -350px; /* Hidden by default */
+    width: 300px;
+    height: 100%;
+    background: var(--dark-bg);
+    border-left: 2px solid var(--primary-color);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    transition: right 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+@media (min-width: 769px) {
+    .settings-panel {
+        width: 500px; /* Increased width for desktop */
+        right: -550px; /* Adjusted hidden position */
+    }
+}
+
+.settings-panel.open {
+    right: 0;
+}
+
+.settings-panel h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    font-size: 2.2rem; /* Slightly larger for impact */
+    font-weight: bold; /* Make it bold */
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 5px var(--glow-color);
+    padding: 5px 10px; /* Add some padding for better click area */
+    border-radius: 5px;
+}
+
+.close-button:hover {
+    transform: rotate(90deg) scale(1.1); /* More pronounced hover effect */
+    background-color: rgba(0, 0, 0, 0.2); /* Subtle background on hover */
+    text-shadow: 0 0 15px var(--glow-color); /* Stronger glow on hover */
+}
+
+.settings-content {
+    flex-grow: 1;
+    padding-top: 40px; /* Space for close button */
+}
+
+.settings-card {
+    background: var(--dark-bg);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(var(--primary-color), 0.3);
+}
+
+.settings-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.score-container p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.control-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.control-option p {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.settings-card ul {
+    list-style: none;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.settings-card li {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.settings-card li strong {
+    color: var(--primary-color);
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--secondary-color);
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Joystick */
+.joystick-container {
+    position: absolute; /* Changed to absolute positioning */
+    bottom: 20px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    background: var(--glass-bg);
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+#shamstick {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#shamstickgear {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(to top right, var(--secondary-color), var(--primary-color));
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 15px var(--glow-color);
+}
+
+.shamstickbase {
+    display: none; /* Using CSS for base now */
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .game-header {
+        padding: 10px 20px;
+    }
+
+    .game-title {
+        font-size: 1.8rem;
+    }
+
+    .level-container {
+        font-size: 1.2rem;
+    }
+
+    .glass-button img {
+        height: 25px;
+    }
+
+    .settings-panel {
+        width: 100%;
+        right: -100%;
+    }
+
+    .settings-panel.open {
+        right: 0;
+    }
+
+    .joystick-container {
+        width: 100px;
+        height: 100px;
+        bottom: 60px; /* Consistent bottom padding for mobile */
+        left: 60px; /* Consistent left padding for mobile */
+    }
+
+    #shamstickgear {
+        width: 50px;
+        height: 50px;
+    }
 }

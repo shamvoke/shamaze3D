@@ -343,10 +343,10 @@ class JoystickController {
         c = d * Math.cos(l),
         h = d * Math.sin(l);
       n.style.transform = `translate3d(${c}px, ${h}px, 0px)`;
-      const m = d < t ? 0 : (i / (i - t)) * (d - t),
-        u = m * Math.cos(l),
+      const m = Math.min(d, i); /* Clamp d to i (max visual radius) */
+        const u = m * Math.cos(l),
         p = m * Math.sin(l),
-        y = parseFloat((u / i).toFixed(4)),
+        y = parseFloat((u / i).toFixed(4)), /* Scale by i (max visual radius) */
         x = parseFloat((p / i).toFixed(4));
       a.value = { x: y, y: x };
     }
@@ -368,7 +368,7 @@ class JoystickController {
       document.addEventListener("touchend", r);
   }
 }
-let joystick = new JoystickController("shamstickgear", 220, 2);
+let joystick = new JoystickController("shamstickgear", 58, 2);
 function update() {
   joystick.active &&
     (joystick.value.x > 0.5
@@ -384,10 +384,17 @@ function update() {
     requestAnimationFrame(update);
 }
 update();
-const gameSettings = (show) =>
-  ["setting-overlay", "setting-box"].forEach(id =>
-    document.getElementById(id).style.display = show ? "block" : "none"
-  );
+const settingsPanel = document.getElementById("settings-panel");
+const settingsButton = document.getElementById("settings-button");
+const closeSettingsButton = document.getElementById("close-settings-button");
+
+settingsButton.addEventListener("click", () => {
+    settingsPanel.classList.add("open");
+});
+
+closeSettingsButton.addEventListener("click", () => {
+    settingsPanel.classList.remove("open");
+});
 const joystickEnable = document.getElementById("JoystickEnable");
 const joystickPosition = document.getElementById("joystickPosition");
 const joystickContainer = document.querySelector(".joystick-container");
@@ -397,7 +404,14 @@ joystickEnable.addEventListener("change", () => {
 joystickPosition.addEventListener("change", () => {
   Object.assign(joystickContainer.style,
     joystickPosition.checked
-      ? { left: "auto", right: "16vw" }
-      : { left: "16vw", right: "auto" }
+      ? { left: "auto", right: "60px" } // Default to right
+      : { left: "60px", right: "auto" } // Toggle to left
   );
 });
+
+// Set initial position based on checkbox state
+Object.assign(joystickContainer.style,
+  joystickPosition.checked
+    ? { left: "auto", right: "60px" }
+    : { left: "60px", right: "auto" }
+);

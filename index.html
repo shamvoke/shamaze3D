@@ -1,94 +1,98 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="" />
-  <meta name="description" content="Sham Maze 3D" />
-  <meta name="author" content="Sham Maze 3D" />
-  <meta name="keywords" content="Sham Maze 3D, Maze Game" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap" rel="stylesheet" />
-  <title>Sham Maze 3D</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="A 3D maze game that will test your sense of direction." />
+    <meta name="author" content="Sham" />
+    <meta name="keywords" content="Sham Maze 3D, Maze Game, 3D Game" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap" rel="stylesheet" />
+    <title>Sham Maze 3D</title>
 </head>
-
 <body>
-  <img rel="preload" id="ball" class="hd" src="img/ball.jpg" />
-  <img rel="preload" id="floor" class="hd" src="img/concrete.jpg" />
-  <img rel="preload" id="brick" class="hd" src="img/Brick.jpg" />
-  <main class="gamebox">
-    <div class="bigsham">
-      <h1 id="level">Level <span>1</span></h1>
-      <p class="tag">Find your way out, or get lost in the fun!!!</p>
-      <img onclick="gameSettings(true)" class="setting" src="img/settings.png" alt="settings" />
-    </div>
-    <div id="setting-overlay" class="setting-overlay" autocomplete="off"></div>
-    <div id="setting-box" class="setting-box" autocomplete="off">
-      <!-- <img src="img/bree.png" alt="bree Logo" srcset="" /> -->
-      <h1>Sham Maze 3D</h1>
-      <div class="settingcard">
-        <div class="stncard">
-          <h3>High Score</h3>
-          <div class="score-container">
-            <p id="highScore"></p>
-            <img src="img/reset.png" alt="Reset" id="resetBtn" />
-          </div>
+    <img rel="preload" id="ball" class="hd" src="img/ball.jpg" />
+    <img rel="preload" id="floor" class="hd" src="img/concrete.jpg" />
+    <img rel="preload" id="brick" class="hd" src="img/Brick.jpg" />
+
+    <main class="game-container">
+        <header class="game-header">
+            
+            <div class="level-container">
+                <h2 id="level">Level <span>1</span></h2>
+            </div>
+            <div class="settings-button-container">
+                <button id="settings-button" class="glass-button">
+                    <img src="img/settings.png" alt="Settings" />
+                </button>
+            </div>
+        </header>
+
+        <aside id="settings-panel" class="settings-panel">
+            <button id="close-settings-button" class="close-button">&times;</button>
+            <div class="settings-content">
+                <h1>Settings</h1>
+                <div class="settings-card">
+                    <h3>High Score</h3>
+                    <div class="score-container">
+                        <p id="highScore">Level 0</p>
+                        <button id="resetBtn" class="glass-button">Reset</button>
+                    </div>
+                </div>
+                <div class="settings-card">
+                    <h3>Controls</h3>
+                    <div class="control-option">
+                        <p>Show Joystick</p>
+                        <label class="switch">
+                            <input type="checkbox" id="JoystickEnable" checked />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="control-option">
+                        <p>Joystick Position</p>
+                        <label class="switch">
+                            <input type="checkbox" id="joystickPosition" checked /><span
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-card">
+                    <h3>How to Play</h3>
+                    <ul>
+                        <li>Find the hidden exit to escape the challenging maze.</li>
+                        <li><strong>Joystick:</strong> Drag the virtual stick to control the ball.</li>
+                        <li><strong>Keyboard:</strong> Use WASD or the directional Arrow keys.</li>
+                        <li><strong>Gamepad:</strong> Use the D-pad for precise movement.</li>
+                    </ul>
+                </div>
+                <div class="settings-card">
+                    <h3>About</h3>
+                    <p>Sham Maze 3D v4.1.2</p>
+                    <p>Stay tuned for updates!</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="joystick-container">
+            <div id="shamstick">
+                <img class="shamstickbase" src="img/joystick-base.png" />
+                <div id="shamstickgear"></div>
+            </div>
         </div>
-        <div class="stncard">
-          <h3>Settings</h3>
-          <p>Show/Hide Joystick</p>
-          <label class="switch">
-            <input type="checkbox" id="JoystickEnable" />
-            <span class="slider"></span>
-          </label>
-          <p>Toggle Joystick position</p>
-          <label class="switch"><input type="checkbox" id="joystickPosition" /><span
-              class="slider round"></span></label>
-        </div>
-        <div class="stncard">
-          <h3>How to Play</h3>
-          <ul>
-            <li><strong>Find the exit and escape the maze.</strong></li>
-            <li>
-              <strong>Onscreen Joystick: </strong>Drag the virtual joystick to
-              control the ball.
-            </li>
-            <li>
-              <strong>Keyboard: </strong>Use the arrow keys or W[up], A[left],
-              S[down], D[right].
-            </li>
-            <li>
-              <strong>TV Remote / Gamepad: </strong>Use the arrow keys to
-              navigate the ball
-            </li>
-          </ul>
-        </div>
-        <div class="stncard">
-          <h3>About</h3>
-          <p>Sham Maze 3D V3.6.1</p>
-          <p>stay tuned for Updates ☺️</p>
-        </div>
-      </div>
-      <span class="close-btn" onclick="gameSettings(false)">X</span>
-    </div>
-    <div class="joystick-container hide">
-      <div id="shamstick">
-        <img class="shamstickbase" src="img/joystick-base.png" />
-        <div id="shamstickgear"></div>
-      </div>
-    </div>
-  </main>
-  <audio id="hit" src="assets/ball.ogg"></audio>
-  <audio id="roll" src=""></audio>
-  <audio id="start" src="assets/start.wav"></audio>
-  <audio id="done" src="assets/done.wav"></audio>
-  <script src="js/Three.js"></script>
-  <script src="js/Box2dWeb.min.js"></script>
-  <script src="js/jquery.js"></script>
-  <script src="js/maze.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/keyboard.js"></script>
+    </main>
+
+    <audio id="hit" src="assets/ball.ogg"></audio>
+    <audio id="roll" src=""></audio>
+    <audio id="start" src="assets/start.wav"></audio>
+    <audio id="done" src="assets/done.wav"></audio>
+
+    <script src="js/Three.js"></script>
+    <script src="js/Box2dWeb.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/maze.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/keyboard.js"></script>
 </body>
 </html>
