@@ -304,7 +304,86 @@ function onMoveKey(e) {
       (gameState = "initialize"),
       requestAnimationFrame(gameLoop);
   });
-
+class JoystickController {
+  constructor(e, i, t) {
+    this.id = e;
+    let n = document.getElementById(e);
+    (this.dragStart = null),
+      (this.touchId = null),
+      (this.active = !1),
+      (this.value = { x: 0, y: 0 });
+    let a = this;
+    function o(e) {
+      (a.active = !0),
+        (n.style.transition = "0s"),
+        e.preventDefault(),
+        e.changedTouches
+          ? (a.dragStart = {
+            x: e.changedTouches[0].clientX,
+            y: e.changedTouches[0].clientY,
+          })
+          : (a.dragStart = { x: e.clientX, y: e.clientY }),
+        e.changedTouches && (a.touchId = e.changedTouches[0].identifier);
+    }
+    function s(e) {
+      if (!a.active) return;
+      let o = null;
+      if (e.changedTouches) {
+        for (let i = 0; i < e.changedTouches.length; i++)
+          a.touchId == e.changedTouches[i].identifier &&
+            ((o = i),
+              (e.clientX = e.changedTouches[i].clientX),
+              (e.clientY = e.changedTouches[i].clientY));
+        if (null == o) return;
+      }
+      const s = e.clientX - a.dragStart.x,
+        r = e.clientY - a.dragStart.y,
+        l = Math.atan2(r, s),
+        d = Math.min(i, Math.hypot(s, r)),
+        c = d * Math.cos(l),
+        h = d * Math.sin(l);
+      n.style.transform = `translate3d(${c}px, ${h}px, 0px)`;
+      const m = Math.min(d, i); /* Clamp d to i (max visual radius) */
+        const u = m * Math.cos(l),
+        p = m * Math.sin(l),
+        y = parseFloat((u / i).toFixed(4)), /* Scale by i (max visual radius) */
+        x = parseFloat((p / i).toFixed(4));
+      a.value = { x: y, y: x };
+    }
+    function r(e) {
+      a.active &&
+        ((e.changedTouches &&
+          a.touchId != e.changedTouches[0].identifier) ||
+          ((n.style.transition = ".2s"),
+            (n.style.transform = "translate3d(0px, 0px, 0px)"),
+            (a.value = { x: 0, y: 0 }),
+            (a.touchId = null),
+            (a.active = !1)));
+    }
+    n.addEventListener("mousedown", o),
+      n.addEventListener("touchstart", o),
+      document.addEventListener("mousemove", s, { passive: !1 }),
+      document.addEventListener("touchmove", s, { passive: !1 }),
+      document.addEventListener("mouseup", r),
+      document.addEventListener("touchend", r);
+  }
+}
+let joystick = new JoystickController("shamstickgear", 58, 2);
+function update() {
+  joystick.active &&
+    (joystick.value.x > 0.5
+      ? (keyAxis[0] = 1)
+      : joystick.value.x < -0.5
+        ? (keyAxis[0] = -1)
+        : (keyAxis[0] = 0),
+      joystick.value.y > 0.5
+        ? (keyAxis[1] = -1)
+        : joystick.value.y < -0.5
+          ? (keyAxis[1] = 1)
+          : (keyAxis[1] = 0)),
+    requestAnimationFrame(update);
+}
+update();
 const settingsModal = document.getElementById("settings-modal");
 const settingsButton = document.getElementById("settings-button");
 const closeSettingsButton = document.getElementById("close-settings-button");
@@ -322,3 +401,26 @@ window.addEventListener("click", (event) => {
         settingsModal.style.display = "none";
     }
 });
+const joystickEnable = document.getElementById("JoystickEnable");
+const joystickPosition = document.getElementById("joystickPosition");
+const joystickContainer = document.querySelector(".joystick-container");
+joystickEnable.addEventListener("change", () => {
+  joystickContainer.style.display = joystickEnable.checked ? "none" : "flex";
+});
+
+// Set initial display based on checkbox state
+joystickContainer.style.display = joystickEnable.checked ? "none" : "flex";
+joystickPosition.addEventListener("change", () => {
+  Object.assign(joystickContainer.style,
+    joystickPosition.checked
+      ? { left: "auto", right: "60px" } // Default to right
+      : { left: "60px", right: "auto" } // Toggle to left
+  );
+});
+
+// Set initial position based on checkbox state
+Object.assign(joystickContainer.style,
+  joystickPosition.checked
+    ? { left: "auto", right: "60px" }
+    : { left: "60px", right: "auto" }
+);
