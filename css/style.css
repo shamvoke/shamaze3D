@@ -96,7 +96,7 @@ canvas {
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(5px);
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 5px 10px;
     color: var(--primary-color);
     font-size: 1rem;
     cursor: pointer;
@@ -147,6 +147,12 @@ canvas {
     box-shadow: 0 0 20px var(--glow-color);
 }
 
+.modal-content h1 {
+    color: var(--primary-color);
+    font-size: 1.5rem; /* Increased size for emphasis */
+    text-align: center;
+}
+
 .modal-content::before {
     content: '';
     position: absolute;
@@ -158,7 +164,7 @@ canvas {
 
 .logo {
     display: block;
-    margin: 10px auto 20px;
+    margin: 10px auto 10px;
     width: 100px;
 }
 
@@ -202,103 +208,14 @@ canvas {
 .settings-card h3 {
     color: var(--primary-color);
     margin-bottom: 10px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .settings-card p {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--text-color);
     margin-bottom: 5px; /* Add margin to separate toggle buttons */
 }
-
-/* Toggle Switch */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 45px;
-    height: 25px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--secondary-color);
-    transition: 0.4s;
-    border-radius: 25px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 19px;
-    width: 19px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: var(--primary-color);
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px var(--primary-color);
-}
-
-input:checked + .slider:before {
-    transform: translateX(19px);
-}
-
-/* Joystick */
-.joystick-container {
-    position: absolute; /* Changed to absolute positioning */
-    bottom: 20px;
-    width: 120px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 50;
-    background: var(--glass-bg);
-    border-radius: 50%;
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 20px var(--glow-color);
-}
-
-#shamstick {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#shamstickgear {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(to top right, var(--secondary-color), var(--primary-color));
-    border-radius: 50%;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 15px var(--glow-color);
-}
-
-.shamstickbase {
-    display: none; /* Using CSS for base now */
-}
-
-
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -325,17 +242,5 @@ input:checked + .slider:before {
 
     .settings-panel.open {
         right: 0;
-    }
-
-    .joystick-container {
-        width: 100px;
-        height: 100px;
-        bottom: 60px; /* Consistent bottom padding for mobile */
-        left: 60px; /* Consistent left padding for mobile */
-    }
-
-    #shamstickgear {
-        width: 50px;
-        height: 50px;
     }
 }
