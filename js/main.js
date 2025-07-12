@@ -384,23 +384,32 @@ function update() {
     requestAnimationFrame(update);
 }
 update();
-const settingsPanel = document.getElementById("settings-panel");
+const settingsModal = document.getElementById("settings-modal");
 const settingsButton = document.getElementById("settings-button");
 const closeSettingsButton = document.getElementById("close-settings-button");
 
 settingsButton.addEventListener("click", () => {
-    settingsPanel.classList.add("open");
+    settingsModal.style.display = "block";
 });
 
 closeSettingsButton.addEventListener("click", () => {
-    settingsPanel.classList.remove("open");
+    settingsModal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+    if (event.target == settingsModal) {
+        settingsModal.style.display = "none";
+    }
 });
 const joystickEnable = document.getElementById("JoystickEnable");
 const joystickPosition = document.getElementById("joystickPosition");
 const joystickContainer = document.querySelector(".joystick-container");
 joystickEnable.addEventListener("change", () => {
-  joystickContainer.style.display = joystickEnable.checked ? "flex" : "none";
+  joystickContainer.style.display = joystickEnable.checked ? "none" : "flex";
 });
+
+// Set initial display based on checkbox state
+joystickContainer.style.display = joystickEnable.checked ? "none" : "flex";
 joystickPosition.addEventListener("change", () => {
   Object.assign(joystickContainer.style,
     joystickPosition.checked

@@ -30,50 +30,39 @@
             </div>
         </header>
 
-        <aside id="settings-panel" class="settings-panel">
-            <button id="close-settings-button" class="close-button">&times;</button>
-            <div class="settings-content">
-                <h1>Settings</h1>
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <button id="close-settings-button" class="close-button">&times;</button>
+                <img src="img/bree.png" alt="Bree Logo" class="logo">
                 <div class="settings-card">
                     <h3>High Score</h3>
-                    <div class="score-container">
-                        <p id="highScore">Level 0</p>
-                        <button id="resetBtn" class="glass-button">Reset</button>
-                    </div>
+                    <p id="highScore">Level 0 <button id="resetBtn" class="glass-button">Reset</button></p>
                 </div>
                 <div class="settings-card">
                     <h3>Controls</h3>
-                    <div class="control-option">
-                        <p>Hide / Show Joystick</p>
+                    <p>Show / Hide Joystick
                         <label class="switch">
-                            <input type="checkbox" id="JoystickEnable" checked />
+                            <input type="checkbox" id="JoystickEnable" />
                             <span class="slider"></span>
                         </label>
-                    </div>
-                    <div class="control-option">
-                        <p>Joystick Position (<-->)</p>
+                    </p>
+                    <p>Joystick Position (<-->)
                         <label class="switch">
-                            <input type="checkbox" id="joystickPosition" checked /><span
+                            <input type="checkbox" id="joystickPosition" checked />
                             <span class="slider round"></span>
                         </label>
-                    </div>
+                    </p>
                 </div>
                 <div class="settings-card">
                     <h3>How to Play</h3>
-                    <ul>
-                        <li>Find the hidden exit to escape the challenging maze.</li>
-                        <li><strong>Joystick:</strong> Drag the virtual stick to control the ball.</li>
-                        <li><strong>Keyboard:</strong> Use WASD or the directional Arrow keys.</li>
-                        <li><strong>Gamepad:</strong> Use the D-pad for precise movement.</li>
-                    </ul>
+                    <p>Use the joystick or keyboard (WASD/Arrow keys) to navigate the maze and find the exit.</p>
                 </div>
                 <div class="settings-card">
                     <h3>About</h3>
-                    <p>Sham Maze 3D v4.1.2</p>
-                    <p>Stay tuned for updates!</p>
+                    <p>Sham Maze 3D v4.1.4 - Stay tuned for updates!</p>
                 </div>
             </div>
-        </aside>
+        </div>
 
         <div class="joystick-container">
             <div id="shamstick">

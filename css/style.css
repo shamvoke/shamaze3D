@@ -83,7 +83,7 @@ canvas {
     border-radius: 10px;
     padding: 5px 15px;
     font-size: clamp(1rem, 2.5vw, 1.5rem); /* Adjusted font size */
-    text-shadow: 0 0 5px var(--glow-color);
+    text-shadow: 0 0 15px var(--glow-color);
     border: 1px solid var(--glass-border);
 }
 
@@ -122,46 +122,50 @@ canvas {
     filter: drop-shadow(0 0 5px var(--glow-color));
 }
 
-/* Settings Panel */
-.settings-panel {
-    position: fixed;
+/* Settings Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
     top: 0;
-    right: -350px; /* Hidden by default */
-    width: 300px;
-    height: 100%;
-    background: var(--dark-bg);
-    border-left: 2px solid var(--primary-color);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-    z-index: 100;
-    transition: right 0.5s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    overflow-y: auto;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-@media (min-width: 769px) {
-    .settings-panel {
-        width: 500px; /* Increased width for desktop */
-        right: -550px; /* Adjusted hidden position */
-    }
+.modal-content {
+    background-color: var(--dark-bg);
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 10px;
+    border: none; /* Remove direct border */
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 400px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 20px var(--glow-color);
 }
 
-.settings-panel.open {
-    right: 0;
+.modal-content::before {
+    content: '';
+    position: absolute;
+    inset: -2px; /* Adjust this value for border thickness */
+    background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+    border-radius: 12px; /* Slightly larger than modal-content border-radius */
+    z-index: -1; /* Place behind the content */
 }
 
-.settings-panel h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-    text-shadow: 0 0 10px var(--glow-color);
+.logo {
+    display: block;
+    margin: 10px auto 20px;
+    width: 100px;
 }
 
 .close-button {
     position: absolute;
     top: 10px;
-    left: 10px;
+    right: 10px;
     background: none;
     border: none;
     font-size: 2.2rem; /* Slightly larger for impact */
@@ -189,8 +193,8 @@ canvas {
     background: var(--dark-bg);
     border: 1px solid var(--secondary-color);
     border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 10px;
+    margin-bottom: 5px;
     text-align: center;
     box-shadow: 0 0 15px rgba(var(--primary-color), 0.3);
 }
@@ -198,55 +202,21 @@ canvas {
 .settings-card h3 {
     color: var(--primary-color);
     margin-bottom: 10px;
-    font-size: 1.2rem;
-}
-
-.score-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.score-container p {
     font-size: 1.1rem;
+}
+
+.settings-card p {
+    font-size: 0.8rem;
     color: var(--text-color);
-}
-
-.control-option {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.control-option p {
-    font-size: 1rem;
-    color: var(--text-color);
-}
-
-.settings-card ul {
-    list-style: none;
-    text-align: left;
-    padding-left: 10px;
-}
-
-.settings-card li {
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    color: var(--text-color);
-}
-
-.settings-card li strong {
-    color: var(--primary-color);
+    margin-bottom: 5px; /* Add margin to separate toggle buttons */
 }
 
 /* Toggle Switch */
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 45px;
+    height: 25px;
 }
 
 .switch input {
@@ -264,16 +234,16 @@ canvas {
     bottom: 0;
     background-color: var(--secondary-color);
     transition: 0.4s;
-    border-radius: 34px;
+    border-radius: 25px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
@@ -288,7 +258,7 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px);
+    transform: translateX(19px);
 }
 
 /* Joystick */
