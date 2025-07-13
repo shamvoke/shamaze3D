@@ -211,63 +211,12 @@ canvas {
     margin-bottom: 5px; /* Add margin to separate toggle buttons */
 }
 
-/* Toggle Switch */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 45px;
-    height: 25px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--secondary-color);
-    transition: 0.4s;
-    border-radius: 25px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 19px;
-    width: 19px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: var(--primary-color);
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px var(--primary-color);
-}
-
-input:checked + .slider:before {
-    transform: translateX(19px);
-}
-
 /* Joystick */
 .joystick-container {
-    position: absolute; /* Changed to absolute positioning */
-    bottom: 20px;
+    position: absolute;
     width: 120px;
     height: 120px;
-    display: flex;
+    display: none; /* Hidden by default */
     align-items: center;
     justify-content: center;
     z-index: 50;
@@ -275,6 +224,12 @@ input:checked + .slider:before {
     border-radius: 50%;
     border: 2px solid var(--primary-color);
     box-shadow: 0 0 20px var(--glow-color);
+    opacity: 0; /* Start with opacity 0 for fade-in */
+    transition: opacity 0.3s ease-out; /* Smooth fade-out */
+}
+
+.joystick-container.fade-out {
+    opacity: 0;
 }
 
 #shamstick {
@@ -330,8 +285,6 @@ input:checked + .slider:before {
     .joystick-container {
         width: 100px;
         height: 100px;
-        bottom: 60px; /* Consistent bottom padding for mobile */
-        left: 60px; /* Consistent left padding for mobile */
     }
 
     #shamstickgear {

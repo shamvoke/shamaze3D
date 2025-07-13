@@ -40,21 +40,6 @@
                     <p id="highScore">Level 0 <button id="resetBtn" class="glass-button">Reset</button></p>
                 </div>
                 <div class="settings-card">
-                    <h3>Controls</h3>
-                    <p>Show / Hide Joystick
-                        <label class="switch">
-                            <input type="checkbox" id="JoystickEnable" />
-                            <span class="slider"></span>
-                        </label>
-                    </p>
-                    <p>Joystick Position (<-->)
-                        <label class="switch">
-                            <input type="checkbox" id="joystickPosition" checked />
-                            <span class="slider round"></span>
-                        </label>
-                    </p>
-                </div>
-                <div class="settings-card">
                     <h3>How to Play</h3>
                     <p>Use the joystick or keyboard (WASD/Arrow keys) to navigate the maze and find the exit.</p>
                 </div>
@@ -65,13 +50,14 @@
             </div>
         </div>
 
-        <div class="joystick-container">
-            <div id="shamstick">
-                <img class="shamstickbase" src="img/joystick-base.png" />
-                <div id="shamstickgear"></div>
-            </div>
+        </main>
+
+    <div class="joystick-container">
+        <div id="shamstick">
+            <img class="shamstickbase" src="img/joystick-base.png" />
+            <div id="shamstickgear"></div>
         </div>
-    </main>
+    </div>
 
     <audio id="hit" src="assets/ball.ogg"></audio>
     <audio id="roll" src=""></audio>

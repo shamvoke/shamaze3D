@@ -308,22 +308,38 @@ class JoystickController {
   constructor(e, i, t) {
     this.id = e;
     let n = document.getElementById(e);
+    let joystickContainer = document.getElementById("shamstick"); // Get the joystick container
     (this.dragStart = null),
       (this.touchId = null),
       (this.active = !1),
       (this.value = { x: 0, y: 0 });
     let a = this;
     function o(e) {
-      (a.active = !0),
-        (n.style.transition = "0s"),
-        e.preventDefault(),
-        e.changedTouches
-          ? (a.dragStart = {
-            x: e.changedTouches[0].clientX,
-            y: e.changedTouches[0].clientY,
-          })
-          : (a.dragStart = { x: e.clientX, y: e.clientY }),
-        e.changedTouches && (a.touchId = e.changedTouches[0].identifier);
+      // Only activate if it's a touch event or a left mouse click
+      if (e.type === 'touchstart' || (e.type === 'mousedown' && e.button === 0)) {
+        e.preventDefault(); // Prevent default to avoid scrolling/zooming
+        a.active = true;
+        n.style.transition = "0s";
+        joystickContainer.style.transition = "0s"; // No transition when appearing
+
+        let clientX, clientY;
+        if (e.changedTouches) {
+          clientX = e.changedTouches[0].clientX;
+          clientY = e.changedTouches[0].clientY;
+          a.touchId = e.changedTouches[0].identifier;
+        } else {
+          clientX = e.clientX;
+          clientY = e.clientY;
+        }
+
+        a.dragStart = { x: clientX, y: clientY };
+
+        // Position the joystick container at the touch/click location
+        joystickContainer.style.display = "flex"; // Make it visible
+        joystickContainer.style.opacity = "1"; // Fade in
+        joystickContainer.style.left = `${clientX - joystickContainer.offsetWidth / 2}px`;
+        joystickContainer.style.top = `${clientY - joystickContainer.offsetHeight / 2}px`;
+      }
     }
     function s(e) {
       if (!a.active) return;
@@ -351,24 +367,36 @@ class JoystickController {
       a.value = { x: y, y: x };
     }
     function r(e) {
-      a.active &&
-        ((e.changedTouches &&
-          a.touchId != e.changedTouches[0].identifier) ||
-          ((n.style.transition = ".2s"),
-            (n.style.transform = "translate3d(0px, 0px, 0px)"),
-            (a.value = { x: 0, y: 0 }),
-            (a.touchId = null),
-            (a.active = !1)));
+      if (a.active) {
+        if (e.changedTouches && a.touchId != e.changedTouches[0].identifier) {
+          return;
+        }
+        n.style.transition = ".2s";
+        n.style.transform = "translate3d(0px, 0px, 0px)";
+        a.value = { x: 0, y: 0 };
+        a.touchId = null;
+        a.active = false;
+
+        // Fade out and hide the joystick container
+        joystickContainer.style.transition = "opacity 0.3s ease-out";
+        joystickContainer.style.opacity = "0";
+        setTimeout(() => {
+          joystickContainer.style.display = "none";
+        }, 300); // Hide after transition
+      }
     }
-    n.addEventListener("mousedown", o),
-      n.addEventListener("touchstart", o),
-      document.addEventListener("mousemove", s, { passive: !1 }),
-      document.addEventListener("touchmove", s, { passive: !1 }),
-      document.addEventListener("mouseup", r),
-      document.addEventListener("touchend", r);
+    document.addEventListener("mousedown", o), // Listen on document for initial touch/click
+    document.addEventListener("touchstart", o),
+    document.addEventListener("mousemove", s, { passive: !1 }),
+    document.addEventListener("touchmove", s, { passive: !1 }),
+    document.addEventListener("mouseup", r),
+    document.addEventListener("touchend", r);
   }
 }
 let joystick = new JoystickController("shamstickgear", 58, 2);
+
+// Hide the joystick container initially
+document.getElementById("shamstick").style.display = "none";
 function update() {
   joystick.active &&
     (joystick.value.x > 0.5
@@ -401,26 +429,4 @@ window.addEventListener("click", (event) => {
         settingsModal.style.display = "none";
     }
 });
-const joystickEnable = document.getElementById("JoystickEnable");
-const joystickPosition = document.getElementById("joystickPosition");
-const joystickContainer = document.querySelector(".joystick-container");
-joystickEnable.addEventListener("change", () => {
-  joystickContainer.style.display = joystickEnable.checked ? "none" : "flex";
-});
 
-// Set initial display based on checkbox state
-joystickContainer.style.display = joystickEnable.checked ? "none" : "flex";
-joystickPosition.addEventListener("change", () => {
-  Object.assign(joystickContainer.style,
-    joystickPosition.checked
-      ? { left: "auto", right: "60px" } // Default to right
-      : { left: "60px", right: "auto" } // Toggle to left
-  );
-});
-
-// Set initial position based on checkbox state
-Object.assign(joystickContainer.style,
-  joystickPosition.checked
-    ? { left: "auto", right: "60px" }
-    : { left: "60px", right: "auto" }
-);
