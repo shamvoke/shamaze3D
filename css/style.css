@@ -211,11 +211,10 @@ canvas {
     color: var(--primary-color);
     font-size: 1.2rem;
 }
-
 .settings-card p {
     font-size: 0.8rem;
     color: var(--text-color);
-    margin-bottom: 5px; /* Add margin to separate toggle buttons */
+     font-family: "Winky Rough", sans-serif;
 }
 
 /* Joystick */
