@@ -73,7 +73,7 @@ canvas {
 }
 
 .game-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.2rem, 3vw, 2rem);
     color: var(--primary-color);
     text-shadow: 0 0 10px var(--glow-color);
 }
@@ -137,14 +137,22 @@ canvas {
 
 .modal-content {
     background-color: var(--dark-bg);
-    margin: 10% auto; /* 10% from the top and centered */
+    margin: 20px auto; /* 10% from the top and centered */
     padding: 10px;
     border: none; /* Remove direct border */
     width: 80%; /* Could be more or less, depending on screen size */
     max-width: 400px;
     border-radius: 10px;
     position: relative;
-    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.modal-content h1 {
+    color: var(--secondary-color);
+    text-align: center;
+ background-image: linear-gradient(45deg, var(--secondary-color) 0%, var(--primary-color) 100%); 
+ background-clip: text; 
+ -webkit-background-clip: text; 
+ -webkit-text-fill-color: transparent; 
 }
 
 .modal-content::before {
@@ -158,7 +166,7 @@ canvas {
 
 .logo {
     display: block;
-    margin: 10px auto 20px;
+    margin: 10px auto 10px;
     width: 100px;
 }
 
@@ -193,7 +201,7 @@ canvas {
     background: var(--dark-bg);
     border: 1px solid var(--secondary-color);
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px;
     margin-bottom: 5px;
     text-align: center;
     box-shadow: 0 0 15px rgba(var(--primary-color), 0.3);
@@ -201,8 +209,7 @@ canvas {
 
 .settings-card h3 {
     color: var(--primary-color);
-    margin-bottom: 10px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .settings-card p {
