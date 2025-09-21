@@ -43,13 +43,11 @@ Sham Maze 3D is a creative remix of the brilliant original game [Astray](https:/
 
 ---
 
-
 ## 🧑‍🎨 Credits
 
 - Core game logic originally created by [wwwtyro](https://github.com/wwwtyro/Astray)
 
 ---
-
 
 ## 🛠️ Want to Tweak It?
 
