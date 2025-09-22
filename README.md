@@ -19,3 +19,11 @@ Sham Maze 3D is a creative remix of the brilliant original game [Astray](https:/
 - 🤖 Compiled android apk
 - 💡 More coming soon...
 ---
+
+## 🧩 Gameplay
+
+- Use the keys **W(up),A(left),S(right) & D(down)** or arrow keys to move (or use the joystick on mobile!)
+- Navigate through the ever growing maze in search of the exit
+- It's not timed... but your pride is on the line 😎
+
+---
