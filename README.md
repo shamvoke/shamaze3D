@@ -35,3 +35,9 @@ Sham Maze 3D is a creative remix of the brilliant original game [Astray](https:/
 - 🌀 [box2d.js](https://github.com/kripken/box2d.js) for physics-based collision detection
 
 ---
+
+## Screenshots
+
+![[Sham Maze 3D Screenshot]](/img/sham-maze.jpg)
+
+---
