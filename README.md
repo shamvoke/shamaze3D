@@ -27,3 +27,11 @@ Sham Maze 3D is a creative remix of the brilliant original game [Astray](https:/
 - It's not timed... but your pride is on the line 😎
 
 ---
+
+## 📦 Tech Stack
+
+- 🕸️ HTML + CSS + JavaScript
+- 🧱 [three.js](https://threejs.org/) for 3D rendering
+- 🌀 [box2d.js](https://github.com/kripken/box2d.js) for physics-based collision detection
+
+---
