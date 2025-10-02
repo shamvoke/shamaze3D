@@ -160,10 +160,10 @@ function createRenderWorld() {
 }
 function updatePhysicsWorld() {
   var e = wBall.GetLinearVelocity();
-  e.Multiply(0.95), wBall.SetLinearVelocity(e);
+  e.Multiply(0.96), wBall.SetLinearVelocity(e);
   var i = new b2Vec2(
-    keyAxis[0] * wBall.GetMass() * 0.25,
-    keyAxis[1] * wBall.GetMass() * 0.25
+    keyAxis[0] * wBall.GetMass() * 0.28,
+    keyAxis[1] * wBall.GetMass() * 0.28
   );
   wBall.ApplyImpulse(i, wBall.GetPosition()),
     (keyAxis = [0, 0]),
@@ -236,7 +236,7 @@ function gameLoop() {
       (light.intensity += 0.1 * (1 - light.intensity)),
         renderer.render(scene, camera),
         Math.abs(light.intensity - 1) < 0.05 &&
-        ((light.intensity = 1.1), (gameState = "play"));
+        ((light.intensity = 1.2), (gameState = "play"));
       break;
     case "play":
       updatePhysicsWorld();
@@ -264,8 +264,13 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 function onResize() {
-  renderer.setSize(window.innerWidth, window.innerHeight),
-    (camera.aspect = window.innerWidth / window.innerHeight),
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    renderer.setSize(window.innerWidth * dpr, window.innerHeight * dpr, false);
+    renderer.domElement.style.width = window.innerWidth + "px";
+    renderer.domElement.style.height = window.innerHeight + "px";
+
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 }
 function onMoveKey(e) {
@@ -293,10 +298,13 @@ function onMoveKey(e) {
     return this.centerv(), this.centerh(), this;
   }),
   $(document).ready(function () {
-      (renderer = new THREE.WebGLRenderer()).setSize(
-        window.innerWidth,
-        window.innerHeight
-      ),
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth * dpr, window.innerHeight * dpr, false);
+
+    renderer.domElement.style.width = window.innerWidth + "px";
+    renderer.domElement.style.height = window.innerHeight + "px";
       document.body.appendChild(renderer.domElement),
       KeyboardJS.bind.axis("left", "right", "down", "up", onMoveKey),
       KeyboardJS.bind.axis("a", "d", "s", "w", onMoveKey),
@@ -308,19 +316,18 @@ class JoystickController {
   constructor(e, i, t) {
     this.id = e;
     let n = document.getElementById(e);
-    let joystickContainer = document.getElementById("shamstick"); // Get the joystick container
+    let joystickContainer = document.getElementById("shamstick"); 
     (this.dragStart = null),
       (this.touchId = null),
       (this.active = !1),
       (this.value = { x: 0, y: 0 });
     let a = this;
     function o(e) {
-      // Only activate if it's a touch event or a left mouse click
       if (e.type === 'touchstart' || (e.type === 'mousedown' && e.button === 0)) {
-        e.preventDefault(); // Prevent default to avoid scrolling/zooming
+        e.preventDefault();
         a.active = true;
         n.style.transition = "0s";
-        joystickContainer.style.transition = "0s"; // No transition when appearing
+        joystickContainer.style.transition = "0s";
 
         let clientX, clientY;
         if (e.changedTouches) {
@@ -333,10 +340,8 @@ class JoystickController {
         }
 
         a.dragStart = { x: clientX, y: clientY };
-
-        // Position the joystick container at the touch/click location
-        joystickContainer.style.display = "flex"; // Make it visible
-        joystickContainer.style.opacity = "1"; // Fade in
+        joystickContainer.style.display = "flex";
+        joystickContainer.style.opacity = "1"; 
         joystickContainer.style.left = `${clientX - joystickContainer.offsetWidth / 2}px`;
         joystickContainer.style.top = `${clientY - joystickContainer.offsetHeight / 2}px`;
       }
@@ -359,10 +364,10 @@ class JoystickController {
         c = d * Math.cos(l),
         h = d * Math.sin(l);
       n.style.transform = `translate3d(${c}px, ${h}px, 0px)`;
-      const m = Math.min(d, i); /* Clamp d to i (max visual radius) */
+      const m = Math.min(d, i); 
         const u = m * Math.cos(l),
         p = m * Math.sin(l),
-        y = parseFloat((u / i).toFixed(4)), /* Scale by i (max visual radius) */
+        y = parseFloat((u / i).toFixed(4)),
         x = parseFloat((p / i).toFixed(4));
       a.value = { x: y, y: x };
     }
@@ -377,15 +382,14 @@ class JoystickController {
         a.touchId = null;
         a.active = false;
 
-        // Fade out and hide the joystick container
         joystickContainer.style.transition = "opacity 0.3s ease-out";
         joystickContainer.style.opacity = "0";
         setTimeout(() => {
           joystickContainer.style.display = "none";
-        }, 300); // Hide after transition
+        }, 300);
       }
     }
-    document.addEventListener("mousedown", o), // Listen on document for initial touch/click
+    document.addEventListener("mousedown", o), 
     document.addEventListener("touchstart", o),
     document.addEventListener("mousemove", s, { passive: !1 }),
     document.addEventListener("touchmove", s, { passive: !1 }),
@@ -395,7 +399,6 @@ class JoystickController {
 }
 let joystick = new JoystickController("shamstickgear", 58, 2);
 
-// Hide the joystick container initially
 document.getElementById("shamstick").style.display = "none";
 function update() {
   joystick.active &&
