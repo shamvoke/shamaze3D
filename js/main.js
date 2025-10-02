@@ -433,3 +433,25 @@ window.addEventListener("click", (event) => {
     }
 });
 
+const indicator = document.getElementById("touch-indicator");
+
+  document.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    indicator.style.left = touch.clientX + "px";
+    indicator.style.top = touch.clientY + "px";
+    indicator.style.display = "block";
+  });
+
+  document.addEventListener("touchmove", (e) => {
+    const touch = e.touches[0];
+    indicator.style.left = touch.clientX + "px";
+    indicator.style.top = touch.clientY + "px";
+  });
+
+  document.addEventListener("touchend", () => {
+    indicator.style.display = "none";
+  });
+
+  document.addEventListener("touchcancel", () => {
+    indicator.style.display = "none";
+  });

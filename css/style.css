@@ -259,7 +259,18 @@ canvas {
     display: none; /* Using CSS for base now */
 }
 
-
+  #touch-indicator {
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    background: rgba(0, 150, 255, 0.5);
+    border: 3px solid rgba(0, 150, 255, 0.9);
+    border-radius: 50%;
+    pointer-events: none; /* don’t block touches */
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 9999;
+  }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
