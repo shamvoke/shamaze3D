@@ -97,6 +97,7 @@ canvas {
     backdrop-filter: blur(5px);
     border-radius: 10px;
     padding: 5px 10px;
+    margin: 5px;
     color: var(--primary-color);
     font-size: 1rem;
     cursor: pointer;
@@ -197,6 +198,7 @@ canvas {
     padding-top: 40px; /* Space for close button */
 }
 
+
 .settings-card {
     background: var(--dark-bg);
     border: 1px solid var(--secondary-color);
@@ -212,9 +214,13 @@ canvas {
     font-size: 1.2rem;
 }
 .settings-card p {
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: var(--text-color);
      font-family: "Winky Rough", sans-serif;
+}
+.settings-card p span {
+    font-weight: bold;
+    text-decoration: wavy underline;
 }
 
 /* Joystick */

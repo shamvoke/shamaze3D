@@ -229,7 +229,7 @@ function gameLoop() {
         }
       }
       localStorage.setItem("highScore", highScore);
-      $("#highScore").html("Current best: Level " + highScore);
+      $("#highScore").html("Level " + highScore);
       gameState = "fade in";
       break;
     case "fade in":
