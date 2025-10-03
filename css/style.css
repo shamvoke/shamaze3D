@@ -24,7 +24,7 @@ html, body {
 }
 
 body {
-    font-family: 'Emilys Candy', cursive; /* Use Emilys Candy everywhere */
+    font-family: 'Emilys Candy', cursive;
     background-color: var(--main-bg);
     color: var(--text-color);
     overflow: hidden;
@@ -34,14 +34,13 @@ body {
     touch-action: none;
 }
 
-/* Style for the Three.js canvas */
 canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Ensure canvas is behind UI */
+    z-index: 0;
 }
 
 .hd {
@@ -49,26 +48,26 @@ canvas {
 }
 
 .game-container {
-    position: fixed; /* Overlay the entire viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Push header to top, joystick to bottom */
-    align-items: center; /* Center items horizontally */
-    z-index: 1; /* Ensure it's above the canvas */
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
 }
 
 .game-header {
-    width: 100%; /* Take full width of game-container */
+    width: 100%;
     display: flex;
-    justify-content: space-between; /* Level text left, settings icon right */
+    justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
-    z-index: 10; /* Ensure header is above other UI elements if needed */
+    z-index: 10;
     box-sizing: border-box;
 }
 
@@ -82,7 +81,7 @@ canvas {
     background-color: var(--glass-bg);
     border-radius: 10px;
     padding: 5px 15px;
-    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Adjusted font size */
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     text-shadow: 0 0 15px var(--glow-color);
     border: 1px solid var(--glass-border);
 }
@@ -120,29 +119,28 @@ canvas {
 }
 
 .glass-button img {
-    height: 30px; /* Increased image size */
+    height: 30px;
     filter: drop-shadow(0 0 5px var(--glow-color));
 }
 
-/* Settings Modal */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 100;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
     background-color: var(--dark-bg);
-    margin: 20px auto; /* 10% from the top and centered */
+    margin: 25px auto;
     padding: 10px;
-    border: none; /* Remove direct border */
-    width: 80%; /* Could be more or less, depending on screen size */
+    border: none;
+    width: 80%;
     max-width: 400px;
     border-radius: 10px;
     position: relative;
