@@ -223,7 +223,14 @@ canvas {
 .settings-card p span {
     font-weight: bold;
 }
-
+.settings-card p a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+.settings-card p a:hover {
+  color: var(--primary-color);
+}
 /* Joystick */
 .joystick-container {
     position: absolute;
