@@ -7,16 +7,21 @@
     <meta name="author" content="Sham" />
     <meta name="keywords" content="Sham Maze 3D, Maze Game, 3D Game" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/splash.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Emilys+Candy&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <title>Sham Maze 3D</title>
 </head>
-<body>
+<body >
+    <canvas id="gameCanvas"></canvas>
+  <div class="welcome">
+  <span id="splash-overlay" class="splash"></span>
+  <span id="welcome" class="z-depth-4"></span>
+  </div>
     <img rel="preload" id="ball" class="hd" src="img/ball.jpg" />
     <img rel="preload" id="floor" class="hd" src="img/concrete.jpg" />
     <img rel="preload" id="brick" class="hd" src="img/Brick.jpg" />
-
     <main class="game-container">
         <header class="game-header">
             

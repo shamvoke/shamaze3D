@@ -299,18 +299,19 @@ function onMoveKey(e) {
   }),
   $(document).ready(function () {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    const canvas = document.getElementById('gameCanvas');
+    renderer = new THREE.WebGLRenderer({ antialias: true, canvas: canvas });
     renderer.setSize(window.innerWidth * dpr, window.innerHeight * dpr, false);
 
     renderer.domElement.style.width = window.innerWidth + "px";
     renderer.domElement.style.height = window.innerHeight + "px";
-      document.body.appendChild(renderer.domElement),
       KeyboardJS.bind.axis("left", "right", "down", "up", onMoveKey),
       KeyboardJS.bind.axis("a", "d", "s", "w", onMoveKey),
       $(window).resize(onResize),
       (gameState = "initialize"),
-      requestAnimationFrame(gameLoop);
+        setTimeout(() => {
+    requestAnimationFrame(gameLoop);
+  }, 1800);
   });
 class JoystickController {
   constructor(e, i, t) {
@@ -397,7 +398,7 @@ class JoystickController {
     document.addEventListener("touchend", r);
   }
 }
-let joystick = new JoystickController("shamstickgear", 58, 2);
+let joystick = new JoystickController("shamstickgear", 20, 2);
 
 document.getElementById("shamstick").style.display = "none";
 function update() {
