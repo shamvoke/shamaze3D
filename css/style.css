@@ -152,19 +152,19 @@ canvas {
 .modal-content h1 {
     color: var(--secondary-color);
     text-align: center;
- background-image: linear-gradient(45deg, var(--secondary-color) 0%, var(--primary-color) 100%); 
- background-clip: text; 
- -webkit-background-clip: text; 
- -webkit-text-fill-color: transparent; 
+    background-image: linear-gradient(45deg, var(--secondary-color) 0%, var(--primary-color) 100%); 
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
 }
 
 .modal-content::before {
     content: '';
     position: absolute;
-    inset: -2px; /* Adjust this value for border thickness */
+    inset: -2px;
     background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
-    border-radius: 12px; /* Slightly larger than modal-content border-radius */
-    z-index: -1; /* Place behind the content */
+    border-radius: 12px;
+    z-index: -1;
 }
 
 .logo {
@@ -190,16 +190,15 @@ canvas {
 }
 
 .close-button:hover {
-    transform: rotate(90deg) scale(1.1); /* More pronounced hover effect */
-    background-color: rgba(0, 0, 0, 0.2); /* Subtle background on hover */
-    text-shadow: 0 0 15px var(--glow-color); /* Stronger glow on hover */
+    transform: rotate(90deg) scale(1.1);
+    background-color: rgba(0, 0, 0, 0.2);
+    text-shadow: 0 0 15px var(--glow-color);
 }
 
 .settings-content {
     flex-grow: 1;
-    padding-top: 40px; /* Space for close button */
+    padding-top: 40px;
 }
-
 
 .settings-card {
     background: var(--dark-bg);
@@ -231,12 +230,11 @@ canvas {
 .settings-card p a:hover {
   color: var(--primary-color);
 }
-/* Joystick */
 .joystick-container {
     position: absolute;
     width: 120px;
     height: 120px;
-    display: none; /* Hidden by default */
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 50;
@@ -244,8 +242,8 @@ canvas {
     border-radius: 50%;
     border: 2px solid var(--primary-color);
     box-shadow: 0 0 20px var(--glow-color);
-    opacity: 0; /* Start with opacity 0 for fade-in */
-    transition: opacity 0.3s ease-out; /* Smooth fade-out */
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
 }
 
 .joystick-container.fade-out {
@@ -270,7 +268,7 @@ canvas {
 }
 
 .shamstickbase {
-    display: none; /* Using CSS for base now */
+    display: none;
 }
 
   #touch-indicator {
@@ -280,13 +278,12 @@ canvas {
     background: rgba(0, 150, 255, 0.5);
     border: 3px solid rgba(0, 150, 255, 0.9);
     border-radius: 50%;
-    pointer-events: none; /* don’t block touches */
+    pointer-events: none;
     transform: translate(-50%, -50%);
     display: none;
     z-index: 9999;
   }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .game-header {
         padding: 10px 20px;
