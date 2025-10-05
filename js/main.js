@@ -456,3 +456,5 @@ const indicator = document.getElementById("touch-indicator");
   document.addEventListener("touchcancel", () => {
     indicator.style.display = "none";
   });
+
+  document.addEventListener("contextmenu", e => e.preventDefault());
