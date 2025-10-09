@@ -22,12 +22,6 @@ function generateSquareMaze(e) {
     }
   })(i, 1, 1));
 }
-webview.getSettings().setJavaScriptEnabled(!0),
-  webview
-    .getSettings()
-    .setUserAgentString(
-      "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0"
-    );
 var playStartSound = function () {
   var e = document.getElementById("start");
   (e.currentTime = 0), e.play();

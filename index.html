@@ -6,11 +6,8 @@
     <meta name="description" content="A 3D maze game that will test your sense of direction." />
     <meta name="author" content="Sham" />
     <meta name="keywords" content="Sham Maze 3D, Maze Game, 3D Game" />
-    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/splash.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Emilys+Candy&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"/>
     <title>Sham Maze 3D</title>
 </head>
 <body >
@@ -19,14 +16,14 @@
   <span id="splash-overlay" class="splash"></span>
   <span id="welcome" class="z-depth-4"></span>
   </div>
-    <img rel="preload" id="ball" class="hd" src="img/ball.jpg" />
-    <img rel="preload" id="floor" class="hd" src="img/concrete.jpg" />
-    <img rel="preload" id="brick" class="hd" src="img/Brick.jpg" />
+    <img rel="preload" id="ball" class="hd upscale" src="img/ball.jpg" />
+    <img rel="preload" id="floor" class="hd upscale" src="img/concrete.jpg" />
+    <img rel="preload" id="brick" class="hd upscale" src="img/Brick.jpg" />
     <main class="game-container">
         <header class="game-header">
             
             <div class="level-container">
-                <h2 id="level">Level <span>1</span></h2>
+                <h2 id="level">Shamaze3D <span> </span></h2>
             </div>
             <div class="settings-button-container">
                 <button id="settings-button" class="glass-button">
@@ -39,7 +36,7 @@
         <div id="settings-modal" class="modal">
             <div class="modal-content">
                 <button id="close-settings-button" class="close-button">&times;</button>
-                <img src="img/bree.png" alt="Bree Logo" class="logo">
+                <img src="img/bree.png" alt="Bree Logo" class="logo upscale">
                 <h1>Shamaze3D</h1>
                 <div class="settings-card">
                     <h3>---> High Score <---</h3>
@@ -54,7 +51,7 @@
                 </div>
                 <div class="settings-card">
                     <h3>---> About <---</h3>
-                    <p>Shamaze3D V4.2.0</p>
+                    <p>Shamaze3D V4.2.1</p>
                     <p>Crafted with 💙 by <a href="https://shamvoke.com" target="_blank">Sham Voke</a></p>
                     <p>Stay tuned for updates!</p>
                 </div>

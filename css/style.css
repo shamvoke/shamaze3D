@@ -1,3 +1,8 @@
+@font-face {
+    font-family:'Emilys Candy' ;
+    src: url(../assets/EmilysCandy-Regular.ttf) format("truetype");
+}
+
 html, body {
     height: 100%;
     width: 100%;
@@ -6,15 +11,15 @@ html, body {
 }
 
 :root {
-    --primary-color: #07fff9; /* Cyan */
-    --secondary-color: #007bff; /* Electric Blue */
-    --dark-bg: #0a0a0a; /* Near Black */
-    --main-bg: #0d1117; /* Deep Space Blue */
-    --text-color: #e0e0e0; /* Light Gray */
-    --glass-border: rgba(100, 200, 255, 0.18); /* Subtle White/Blue */
-    --glass-bg: rgba(0, 0, 0, 0.3); /* Transparent Dark Blue */
-    --glow-color: #07fff9; /* Cyan */
-    --warning-color: #ff073a; /* Neon Red */
+    --primary-color: #07fff9;
+    --secondary-color: #007bff;
+    --dark-bg: #0a0a0a;
+    --main-bg: #0d1117;
+    --text-color: #e0e0e0;
+    --glass-border: rgba(100, 200, 255, 0.18);
+    --glass-bg: rgba(0, 0, 0, 0.3);
+    --glow-color: #07fff9;
+    --warning-color: #ff073a;
 }
 
 * {
@@ -48,6 +53,9 @@ canvas {
 
 .hd {
     display: none;
+}
+.upscale {
+    image-rendering: crisp-edges;
 }
 
 .game-container {

@@ -398,7 +398,7 @@ class JoystickController {
     document.addEventListener("touchend", r);
   }
 }
-let joystick = new JoystickController("shamstickgear", 20, 2);
+let joystick = new JoystickController("shamstickgear", 15, 2);
 
 document.getElementById("shamstick").style.display = "none";
 function update() {
