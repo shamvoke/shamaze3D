@@ -1,3 +1,12 @@
+/**
+ * Maze generation for Shamaze3D.
+ */
+
+/**
+ * Generates a square maze with the specified dimension.
+ * @param {number} e - Dimension of the maze.
+ * @returns {Array} 2D array representing the maze.
+ */
 function generateSquareMaze(e) {
   var i = new Array(e);
   i.dimension = e;
@@ -22,10 +31,3 @@ function generateSquareMaze(e) {
     }
   })(i, 1, 1));
 }
-var playStartSound = function () {
-  var e = document.getElementById("start");
-  (e.currentTime = 0), e.play();
-};
-window.onload = function () {
-  setTimeout(playStartSound, 3500);
-};
