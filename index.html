@@ -9,111 +9,141 @@
     <link rel="stylesheet" href="css/splash.css">
     <link rel="stylesheet" href="css/style.css"/>
     <title>Sham Maze 3D</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-shamblue: #007bff;
+        --color-shamcyan: #07fff9;
+        --color-shamtext: #e0e0e0;
+      }
+    </style>
 </head>
-<body >
-    <canvas id="gameCanvas"></canvas>
+<body class="m-0 p-0 w-full h-full overflow-hidden flex items-center justify-center touch-none bg-[#0d1117] text-shamtext select-none">
+
+  <canvas id="gameCanvas" class="fixed top-0 left-0 w-full h-full z-0"></canvas>
+
   <div class="welcome">
-  <span id="splash-overlay" class="splash"></span>
-  <span id="welcome" class="z-depth-4"></span>
+    <span id="splash-overlay" class="splash"></span>
+    <span id="welcome" class="z-depth-4"></span>
   </div>
-    <img rel="preload" id="ball" class="hd" src="img/ball.webp" />
-    <img rel="preload" id="floor" class="hd" src="img/concrete.webp" />
-    <img rel="preload" id="brick" class="hd" src="img/Brick.webp" />
-    <main class="game-container">
-        <header class="game-header">
-            
-            <div class="level-container">
-                <h2 id="level">Shamaze3D <span> </span></h2>
-            </div>
-            <div class="settings-button-container">
-                <button id="settings-button" class="glass-button">
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="35px" height="35px">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="style=fill"> <g id="setting"> <path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M10.8946 3.00654C10.2226 1.87704 8.75191 1.45656 7.59248 2.14193L5.86749 3.12906C4.59518 3.85639 4.16378 5.48726 4.8906 6.74522L4.89112 6.74611C5.26606 7.39298 5.20721 7.8062 5.09018 8.00929C4.97308 8.21249 4.64521 8.47001 3.9 8.47001C2.43322 8.47001 1.25 9.66837 1.25 11.12V12.88C1.25 14.3317 2.43322 15.53 3.9 15.53C4.64521 15.53 4.97308 15.7875 5.09018 15.9907C5.20721 16.1938 5.26606 16.607 4.89112 17.2539L4.8906 17.2548C4.16378 18.5128 4.59558 20.1439 5.8679 20.8712L7.59257 21.8581C8.75199 22.5434 10.2226 22.123 10.8946 20.9935L11.0091 20.7958C11.3841 20.1489 11.773 19.9925 12.0087 19.9925C12.2434 19.9925 12.6293 20.1476 12.9993 20.793L13.0009 20.7958L13.1109 20.9858L13.1154 20.9935C13.7874 22.123 15.258 22.5434 16.4174 21.8581L18.1425 20.871C19.4157 20.1431 19.8444 18.5235 19.1212 17.2579L19.1189 17.2539C18.7439 16.607 18.8028 16.1938 18.9198 15.9907C19.0369 15.7875 19.3648 15.53 20.11 15.53C21.5768 15.53 22.76 14.3317 22.76 12.88V11.12C22.76 9.65323 21.5616 8.47001 20.11 8.47001C19.3648 8.47001 19.0369 8.21249 18.9198 8.00929C18.8028 7.8062 18.7439 7.39298 19.1189 6.74611L19.1194 6.74522C19.8463 5.48713 19.4147 3.85604 18.1421 3.12883L16.4175 2.14193C15.2581 1.45656 13.7874 1.877 13.1154 3.00651L13.0009 3.20423C12.6259 3.85115 12.237 4.00751 12.0012 4.00751C11.7666 4.00751 11.3807 3.85247 11.0107 3.20701L11.0091 3.20423L10.8991 3.01421L10.8946 3.00654ZM15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" fill="#fff"></path> </g> </g> </g></svg>
-                </button>
-            </div>
-        </header>
- 
-        <div id="settings-modal" class="modal">
-            <div class="modal-content">
-                <button id="close-settings-button" class="close-button">&times;</button>
-                <img src="img/bree.png" alt="Bree Logo" class="logo">
-                <h1>Shamaze3D</h1>
-                <div class="settings-card">
-                    <h3>---> High Score <---</h3>
-                    <p >Current best: <span id="highScore"></span> <button id="resetBtn" class="glass-button">Reset</button></p>
-                </div>
-                <div class="settings-card">
-                    <h3>---> How to Play <---</h3>
-                    <p>➣ Use virtual joystick to control the ball</p>
-                    <p>➣ keyboard W⬆️ A⬅️ S⬇️ D➡️ keys</p>
-                    <p>➣ Gamepad & keyboard Arrow keys</p>
-                    <p><span>Navigate the maze and find the exit.</span></p>
-                </div>
-                <div class="settings-card">
-                    <h3>---> About <---</h3>
-                    <p>Shamaze3D V4.2.1</p>
-                    <p>Crafted with 💙 by <a href="https://shamvoke.com" target="_blank">Sham</a></p>
-                    <p>Stay tuned for updates!</p>
-                </div>
-            </div>
+
+  <img rel="preload" id="ball" class="hidden" src="img/ball.webp" />
+  <img rel="preload" id="floor" class="hidden" src="img/concrete.webp" />
+  <img rel="preload" id="brick" class="hidden" src="img/Brick.webp" />
+
+  <main id="game-ui" class="fixed inset-0 z-[1] flex flex-col justify-between items-center">
+
+    <header class="w-full flex items-center justify-between px-5 md:px-[30px] py-[10px] md:py-[15px] z-10">
+      <div class="bg-black/30 border border-shamcyan/15 rounded-xl px-[15px] py-[5px] text-xl font-bold">
+        <h2 id="level">Shamaze3D <span></span></h2>
+      </div>
+
+      <div class="z-[11]">
+        <button
+          id="settings-button"
+          class="bg-black/30 border border-shamcyan/15 backdrop-blur-[5px] rounded-xl px-[10px] py-[5px] m-[5px] cursor-pointer"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="35px" height="35px">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <g id="style=fill">
+                <g id="setting">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.8946 3.00654C10.2226 1.87704 8.75191 1.45656 7.59248 2.14193L5.86749 3.12906C4.59518 3.85639 4.16378 5.48726 4.8906 6.74522L4.89112 6.74611C5.26606 7.39298 5.20721 7.8062 5.09018 8.00929C4.97308 8.21249 4.64521 8.47001 3.9 8.47001C2.43322 8.47001 1.25 9.66837 1.25 11.12V12.88C1.25 14.3317 2.43322 15.53 3.9 15.53C4.64521 15.53 4.97308 15.7875 5.09018 15.9907C5.20721 16.1938 5.26606 16.607 4.89112 17.2539L4.8906 17.2548C4.16378 18.5128 4.59558 20.1439 5.8679 20.8712L7.59257 21.8581C8.75199 22.5434 10.2226 22.123 10.8946 20.9935L11.0091 20.7958C11.3841 20.1489 11.773 19.9925 12.0087 19.9925C12.2434 19.9925 12.6293 20.1476 12.9993 20.793L13.0009 20.7958L13.1109 20.9858L13.1154 20.9935C13.7874 22.123 15.258 22.5434 16.4174 21.8581L18.1425 20.871C19.4157 20.1431 19.8444 18.5235 19.1212 17.2579L19.1189 17.2539C18.7439 16.607 18.8028 16.1938 18.9198 15.9907C19.0369 15.7875 19.3648 15.53 20.11 15.53C21.5768 15.53 22.76 14.3317 22.76 12.88V11.12C22.76 9.65323 21.5616 8.47001 20.11 8.47001C19.3648 8.47001 19.0369 8.21249 18.9198 8.00929C18.8028 7.8062 18.7439 7.39298 19.1189 6.74611L19.1194 6.74522C19.8463 5.48713 19.4147 3.85604 18.1421 3.12883L16.4175 2.14193C15.2581 1.45656 13.7874 1.877 13.1154 3.00651L13.0009 3.20423C12.6259 3.85115 12.237 4.00751 12.0012 4.00751C11.7666 4.00751 11.3807 3.85247 11.0107 3.20701L11.0091 3.20423L10.8991 3.01421L10.8946 3.00654ZM15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" fill="#fff"></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div id="settings-modal" class="hidden fixed inset-0 z-[100] overflow-auto backdrop-blur-[8px] bg-black/40">
+      <div class="relative bg-[#0a0a0a] mx-auto my-[25px] p-[10px] w-[80%] max-w-[400px] rounded-xl border-none modal-shell">
+
+        <button
+          id="close-settings-button"
+          class="absolute top-0 right-[10px] bg-transparent border-none text-[2.2rem] font-bold text-shamcyan cursor-pointer transition-all duration-200 rounded-[5px]"
+        >
+          &times;
+        </button>
+
+        <img src="img/bree.png" alt="Bree Logo" class="block mx-auto mt-[10px] w-[100px]" />
+
+        <h1 class="text-center font-bold text-shamcyan text-3xl">
+          Shamaze3D
+        </h1>
+
+        <div class="bg-[#0a0a0a] border border-shamblue rounded-xl p-[5px] mb-[5px] text-center">
+          <h3 class="text-shamcyan text-xl">---&gt; High Score &lt;---</h3>
+          <p class="text-sm text-shamtext font-sans">
+            Current best: <span id="highScore"></span>
+            <button
+              id="resetBtn"
+              class="bg-black/30 border border-[rgba(100,200,255,0.18)] backdrop-blur-[5px] rounded-xl px-[10px] py-[5px] m-[5px] text-shamcyan/80 text-sm cursor-pointer hover:-translate-y-[2px]"
+            >
+              Reset
+            </button>
+          </p>
         </div>
 
-        </main>
+        <div class="bg-[#0a0a0a] border border-shamblue rounded-[10px] p-[5px] mb-[5px] text-center">
+          <h3 class="text-shamcyan text-xl">---&gt; How to Play &lt;---</h3>
+          <p class="text-sm text-shamtext font-sans">➣ Use virtual joystick to control the ball</p>
+          <p class="text-sm text-shamtext font-sans">➣ keyboard W⬆️ A⬅️ S⬇️ D➡️ keys</p>
+          <p class="text-sm text-shamtext font-sans">➣ Gamepad & keyboard Arrow keys</p>
+          <p class="text-xs text-shamtext font-sans"><span class="font-bold">Navigate the maze and find the exit.</span></p>
+        </div>
 
-<div id="joystick-zone"
-     style="
-       position: absolute;
-       bottom: 40px;
-       width: 80vw;
-       height: 80vh;
-       z-index: 10;
-       touch-action: none;
-       opacity: 0;
-        pointer-events: none;
-        transition: opacity .4s ease;
-     ">
+        <div class="bg-[#0a0a0a] border border-shamblue rounded-[10px] p-[5px] mb-[5px] text-center">
+          <h3 class="text-shamcyan text-xl">---&gt; About &lt;---</h3>
+          <p class="text-sm text-shamtext font-sans">Shamaze3D V4.3.1</p>
+          <p class="text-sm text-shamtext font-sans">
+            Crafted with 💙 by
+            <a href="https://shamvoke.com" target="_blank" class="hover:text-shamcyan font-bold no-underline">Sham voke</a>
+          </p>
+          <p class="text-xs font-bold text-shamtext font-sans">Stay tuned for updates!</p>
+        </div>
 
-  <div id="joystick-base"
-       style="
-         position: absolute;
-         width: 128px;
-         height: 128px;
-         right: 50px;
-         bottom: 80px;
-       ">
-    <img src="img/joystick-base.webp" style="width: 128px; height: 128px; pointer-events: none;" />
+      </div>
+    </div>
+  </main>
 
-    <div id="stick1"
-         style="
-           position: absolute;
-           left: 32px;
-           top: 32px;
-         ">
-      <img src="img/joystick-blue.svg" style="width: 64px; height: 64px; pointer-events: none;" />
+  <div
+    id="joystick-zone"
+    class="absolute bottom-[40px] w-[80vw] h-[80vh] z-10 touch-none opacity-0 pointer-events-none transition-opacity duration-300"
+  >
+    <div
+      id="joystick-base"
+      class="absolute w-[128px] h-[128px] right-[50px] bottom-[80px]"
+    >
+      <img src="img/joystick-base.webp" class="w-[128px] h-[128px] pointer-events-none" />
+
+      <div id="stick1" class="absolute left-[32px] top-[32px]">
+        <img src="img/joystick-blue.svg" class="w-[64px] h-[64px] pointer-events-none" />
+      </div>
     </div>
   </div>
 
-</div>
+  <audio id="hit" src="assets/ball.ogg"></audio>
+  <audio id="start" src="assets/start.wav"></audio>
+  <audio id="done" src="assets/done.wav"></audio>
 
-    <audio id="hit" src="assets/ball.ogg"></audio>
-    <audio id="start" src="assets/start.wav"></audio>
-    <audio id="done" src="assets/done.wav"></audio>
+  <script src="js/libs/Three.js"></script>
+  <script src="js/libs/Box2dWeb.min.js"></script>
+  <script src="js/libs/jquery.js"></script>
+  <script src="js/libs/keyboard.js"></script>
 
-    <script src="js/libs/Three.js"></script>
-    <script src="js/libs/Box2dWeb.min.js"></script>
-    <script src="js/libs/jquery.js"></script>
-    <script src="js/libs/keyboard.js"></script>
+  <script src="js/utils/math.js"></script>
+  <script src="js/utils/maze-gen.js"></script>
+  <script src="js/utils/audio.js"></script>
 
-    <script src="js/utils/math.js"></script>
-    <script src="js/utils/maze-gen.js"></script>
-    <script src="js/utils/audio.js"></script>
-
-    <script src="js/game/globals.js"></script>
-    <script src="js/controls/input-handler.js"></script>
-    <script src="js/controls/joystick.js"></script>
-    <script src="js/ui/settings.js"></script>
-    <script src="js/game/physics.js"></script>
-    <script src="js/game/render.js"></script>
-    <script src="js/game/engine.js"></script>
+  <script src="js/game/globals.js"></script>
+  <script src="js/controls/input-handler.js"></script>
+  <script src="js/controls/joystick.js"></script>
+  <script src="js/ui/settings.js"></script>
+  <script src="js/game/physics.js"></script>
+  <script src="js/game/render.js"></script>
+  <script src="js/game/engine.js"></script>
 </body>
 </html>

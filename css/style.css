@@ -1,264 +1,30 @@
 @font-face {
-    font-family:'Emilys Candy' ;
-    src: url(../assets/EmilysCandy-Regular.ttf) format("truetype");
+  font-family: 'Emilys Candy';
+  src: url(../assets/EmilysCandy-Regular.ttf) format("truetype");
 }
 
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-:root {
-    --primary-color: #07fff9;
-    --secondary-color: #007bff;
-    --dark-bg: #0a0a0a;
-    --main-bg: #0d1117;
-    --text-color: #e0e0e0;
-    --glass-border: rgba(100, 200, 255, 0.18);
-    --glass-bg: rgba(0, 0, 0, 0.3);
-    --glow-color: #07fff9;
-    --warning-color: #ff073a;
+html,
+body {
+  height: 100%;
+  width: 100%;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 body {
-    font-family: 'Emilys Candy', cursive;
-    background-color: var(--main-bg);
-    color: var(--text-color);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    touch-action: none;
+  font-family: 'Emilys Candy', cursive;
 }
 
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.hd {
-    display: none;
-}
-
-.game-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1;
-}
-
-.game-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
-    z-index: 10;
-    box-sizing: border-box;
-}
-
-.game-title {
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    color: var(--primary-color);
-    text-shadow: 0 0 10px var(--glow-color);
-}
-
-.level-container {
-    background-color: var(--glass-bg);
-    border-radius: 10px;
-    padding: 5px 15px;
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    border: 1px solid var(--glass-border);
-}
-
-.settings-button-container {
-    z-index: 11;
-}
-
-.glass-button {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(5px);
-    border-radius: 10px;
-    padding: 5px 10px;
-    margin: 5px;
-    color: var(--primary-color);
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    text-shadow: 0 0 5px var(--glow-color);
-    -webkit-tap-highlight-color: transparent;
-}
-
-.glass-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-}
-
-.glass-button:focus,
-.close-button:focus,
-.switch input:focus {
-    outline: none;
-}
-
-.glass-button img {
-    height: 30px;
-    filter: drop-shadow(0 0 5px var(--glow-color));
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    backdrop-filter: blur(8px);
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-    background-color: var(--dark-bg);
-    margin: 25px auto;
-    padding: 10px;
-    border: none;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 10px;
-    position: relative;
-}
-
-.modal-content h1 {
-    color: var(--secondary-color);
-    text-align: center;
-    background-image: linear-gradient(45deg, var(--secondary-color) 0%, var(--primary-color) 100%); 
-    background-clip: text; 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-}
-
-.modal-content::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
-    border-radius: 12px;
-    z-index: -1;
-}
-
-.logo {
-    display: block;
-    margin: 10px auto 0;
-    width: 100px;
-}
-
-.close-button {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 2.2rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border-radius: 5px;
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.close-button:hover {
-    transform: rotate(90deg) scale(1.1);
-    background-color: rgba(0, 0, 0, 0.2);
-    text-shadow: 0 0 15px var(--glow-color);
-}
-
-.settings-content {
-    flex-grow: 1;
-    padding-top: 40px;
-}
-
-.settings-card {
-    background: var(--dark-bg);
-    border: 1px solid var(--secondary-color);
-    border-radius: 10px;
-    padding: 5px;
-    margin-bottom: 5px;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(var(--primary-color), 0.3);
-}
-
-.settings-card h3 {
-    color: var(--primary-color);
-    font-size: 1.2rem;
-}
-.settings-card p {
-    font-size: 1rem;
-    color: var(--text-color);
-     font-family: "Winky Rough", sans-serif;
-}
-.settings-card p span {
-    font-weight: bold;
-}
-.settings-card p a {
-  color: var(--secondary-color);
-  text-decoration: none;
-  font-weight: bold;
-}
-.settings-card p a:hover {
-  color: var(--primary-color);
-}
-
-@media (max-width: 768px) {
-    .game-header {
-        padding: 10px 20px;
-    }
-
-    .game-title {
-        font-size: 1.8rem;
-    }
-
-    .level-container {
-        font-size: 1.2rem;
-    }
-
-    .glass-button img {
-        height: 25px;
-    }
-
-    .settings-panel {
-        width: 100%;
-        right: -100%;
-    }
-
-    .settings-panel.open {
-        right: 0;
-    }
+.modal-shell::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(to left, #07fff9, #007bff);
+  border-radius: 12px;
+  z-index: -1;
 }
