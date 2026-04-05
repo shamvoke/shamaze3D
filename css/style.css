@@ -236,59 +236,6 @@ canvas {
 .settings-card p a:hover {
   color: var(--primary-color);
 }
-.joystick-container {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 50;
-    background: var(--glass-bg);
-    border-radius: 50%;
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 20px var(--glow-color);
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-}
-
-.joystick-container.fade-out {
-    opacity: 0;
-}
-
-#shamstick {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#shamstickgear {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(to top right, var(--secondary-color), var(--primary-color));
-    border-radius: 50%;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 15px var(--glow-color);
-}
-
-.shamstickbase {
-    display: none;
-}
-
-  #touch-indicator {
-    position: fixed;
-    width: 70px;
-    height: 70px;
-    background: rgba(0, 150, 255, 0.5);
-    border: 3px solid rgba(0, 150, 255, 0.9);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    display: none;
-    z-index: 9999;
-  }
 
 @media (max-width: 768px) {
     .game-header {
@@ -314,15 +261,5 @@ canvas {
 
     .settings-panel.open {
         right: 0;
-    }
-
-    .joystick-container {
-        width: 100px;
-        height: 100px;
-    }
-
-    #shamstickgear {
-        width: 50px;
-        height: 50px;
     }
 }

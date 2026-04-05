@@ -1,127 +1,188 @@
-/**
- * Virtual joystick controller for Shamaze3D.
- */
-
 class JoystickController {
-  constructor(e, i, t) {
-    this.id = e;
-    let n = document.getElementById(e);
-    let joystickContainer = document.getElementById("shamstick"); 
-    (this.dragStart = null),
-      (this.touchId = null),
-      (this.active = !1),
-      (this.value = { x: 0, y: 0 });
-    let a = this;
+  constructor(stickID, maxDistance, deadzone) {
+    this.id = stickID;
+    this.stick = document.getElementById(stickID);
+    this.base = document.getElementById("joystick-base");
+    this.zone = document.getElementById("joystick-zone");
 
-    function o(e) {
-      if (e.type === 'touchstart' || (e.type === 'mousedown' && e.button === 0)) {
-        // e.preventDefault(); // Moved to conditional to avoid issues with other buttons
-        if (e.target.closest('#settings-button') || e.target.closest('.modal')) return;
+    this.maxDistance = maxDistance;
+    this.deadzone = deadzone;
 
-        a.active = true;
-        n.style.transition = "0s";
-        joystickContainer.style.transition = "0s";
+    this.dragStart = null;
+    this.touchId = null;
+    this.active = false;
+    this.value = { x: 0, y: 0 };
 
-        let clientX, clientY;
-        if (e.changedTouches) {
-          clientX = e.changedTouches[0].clientX;
-          clientY = e.changedTouches[0].clientY;
-          a.touchId = e.changedTouches[0].identifier;
-        } else {
-          clientX = e.clientX;
-          clientY = e.clientY;
-        }
+    // remember original base position (home position)
+    this.homeRight = this.base.style.right || "0px";
+    this.homeBottom = this.base.style.bottom || "0px";
 
-        a.dragStart = { x: clientX, y: clientY };
-        joystickContainer.style.display = "flex";
-        joystickContainer.style.opacity = "1"; 
-        joystickContainer.style.left = `${clientX - joystickContainer.offsetWidth / 2}px`;
-        joystickContainer.style.top = `${clientY - joystickContainer.offsetHeight / 2}px`;
-      }
-    }
+    // base center inside its own box
+    this.baseRadius = 64;
 
-    function s(e) {
-      if (!a.active) return;
-      let o = null;
-      if (e.changedTouches) {
-        for (let i = 0; i < e.changedTouches.length; i++)
-          a.touchId == e.changedTouches[i].identifier &&
-            ((o = i),
-              (e.clientX = e.changedTouches[i].clientX),
-              (e.clientY = e.changedTouches[i].clientY));
-        if (null == o) return;
-      }
-      const s = e.clientX - a.dragStart.x,
-        r = e.clientY - a.dragStart.y,
-        l = Math.atan2(r, s),
-        d = Math.min(i, Math.hypot(s, r)),
-        c = d * Math.cos(l),
-        h = d * Math.sin(l);
-      n.style.transform = `translate3d(${c}px, ${h}px, 0px)`;
-      const m = Math.min(d, i); 
-        const u = m * Math.cos(l),
-        p = m * Math.sin(l),
-        y = parseFloat((u / i).toFixed(4)),
-        x = parseFloat((p / i).toFixed(4));
-      a.value = { x: y, y: x };
-    }
+    let self = this;
 
-    function r(e) {
-      if (a.active) {
-        if (e.changedTouches && a.touchId != e.changedTouches[0].identifier) {
-          return;
-        }
-        n.style.transition = ".2s";
-        n.style.transform = "translate3d(0px, 0px, 0px)";
-        a.value = { x: 0, y: 0 };
-        a.touchId = null;
-        a.active = false;
-
-        joystickContainer.style.transition = "opacity 0.3s ease-out";
-        joystickContainer.style.opacity = "0";
-        setTimeout(() => {
-          if (!a.active) {
-            joystickContainer.style.display = "none";
+    function getEventPosition(event) {
+      if (event.changedTouches) {
+        for (let i = 0; i < event.changedTouches.length; i++) {
+          if (self.touchId === null || self.touchId === event.changedTouches[i].identifier) {
+            return {
+              x: event.changedTouches[i].clientX,
+              y: event.changedTouches[i].clientY,
+              id: event.changedTouches[i].identifier
+            };
           }
-        }, 300);
+        }
+        return null;
+      } else {
+        return {
+          x: event.clientX,
+          y: event.clientY,
+          id: null
+        };
       }
     }
 
-    document.addEventListener("mousedown", o); 
-    document.addEventListener("touchstart", o, { passive: false });
-    document.addEventListener("mousemove", s, { passive: false });
-    document.addEventListener("touchmove", s, { passive: false });
-    document.addEventListener("mouseup", r);
-    document.addEventListener("touchend", r);
+    function isInsideZone(x, y) {
+      const rect = self.zone.getBoundingClientRect();
+      return (
+        x >= rect.left &&
+        x <= rect.right &&
+        y >= rect.top &&
+        y <= rect.bottom
+      );
+    }
+
+    function moveBaseTo(x, y) {
+      const zoneRect = self.zone.getBoundingClientRect();
+
+      // place base centered under finger, clamped inside zone
+      let newLeft = x - zoneRect.left - self.baseRadius;
+      let newTop = y - zoneRect.top - self.baseRadius;
+
+      const maxLeft = zoneRect.width - 128;
+      const maxTop = zoneRect.height - 128;
+
+      newLeft = Math.max(0, Math.min(newLeft, maxLeft));
+      newTop = Math.max(0, Math.min(newTop, maxTop));
+
+      self.base.style.left = `${newLeft}px`;
+      self.base.style.top = `${newTop}px`;
+      self.base.style.right = "auto";
+      self.base.style.bottom = "auto";
+    }
+
+    function handleDown(event) {
+      event.preventDefault();
+
+      const pos = getEventPosition(event);
+      if (!pos) return;
+
+      if (!isInsideZone(pos.x, pos.y)) return;
+
+      self.active = true;
+      self.touchId = pos.id;
+
+      // move base to touch point (SEMI behavior)
+      moveBaseTo(pos.x, pos.y);
+
+      self.dragStart = { x: pos.x, y: pos.y };
+
+      self.stick.style.transition = "0s";
+    }
+
+    function handleMove(event) {
+      if (!self.active) return;
+
+      const pos = getEventPosition(event);
+      if (!pos) return;
+
+      const xDiff = pos.x - self.dragStart.x;
+      const yDiff = pos.y - self.dragStart.y;
+      const angle = Math.atan2(yDiff, xDiff);
+      const distance = Math.min(self.maxDistance, Math.hypot(xDiff, yDiff));
+
+      const xPosition = distance * Math.cos(angle);
+      const yPosition = distance * Math.sin(angle);
+
+      // move red stick
+      self.stick.style.transform = `translate3d(${xPosition}px, ${yPosition}px, 0px)`;
+
+      // deadzone adjustment
+      const distance2 =
+        distance < self.deadzone
+          ? 0
+          : self.maxDistance / (self.maxDistance - self.deadzone) * (distance - self.deadzone);
+
+      const xPosition2 = distance2 * Math.cos(angle);
+      const yPosition2 = distance2 * Math.sin(angle);
+
+      const xPercent = parseFloat((xPosition2 / self.maxDistance).toFixed(4));
+      const yPercent = parseFloat((yPosition2 / self.maxDistance).toFixed(4));
+
+      self.value = { x: xPercent, y: yPercent };
+    }
+
+    function handleUp(event) {
+      if (!self.active) return;
+
+      if (event.changedTouches) {
+        let valid = false;
+        for (let i = 0; i < event.changedTouches.length; i++) {
+          if (event.changedTouches[i].identifier === self.touchId) {
+            valid = true;
+            break;
+          }
+        }
+        if (!valid) return;
+      }
+
+      // reset thumb
+      self.stick.style.transition = ".2s";
+      self.stick.style.transform = `translate3d(0px, 0px, 0px)`;
+
+      // clean reset
+      self.value = { x: 0, y: 0 };
+      self.touchId = null;
+      self.active = false;
+
+      setTimeout(() => {
+        self.base.style.transition = "0s";
+      }, 200);
+    }
+
+    this.zone.addEventListener("mousedown", handleDown);
+    this.zone.addEventListener("touchstart", handleDown, { passive: false });
+
+    document.addEventListener("mousemove", handleMove, { passive: false });
+    document.addEventListener("touchmove", handleMove, { passive: false });
+
+    document.addEventListener("mouseup", handleUp);
+    document.addEventListener("touchend", handleUp);
   }
 }
 
-// Global joystick instance
-let joystick = new JoystickController("shamstickgear", 15, 2);
-document.getElementById("shamstick").style.display = "none";
+setTimeout(() => {
+  const joystickZone = document.getElementById("joystick-zone");
+  joystickZone.style.opacity = "1";
+  joystickZone.style.pointerEvents = "auto";
+}, 3600);
 
-/**
- * Polls the joystick value and updates the global keyAxis.
- */
+let joystick1 = new JoystickController("stick1", 64, 8);
+
 function updateJoystick() {
-  if (joystick.active) {
-    if (joystick.value.x > 0.5) {
-      keyAxis[0] = 1;
-    } else if (joystick.value.x < -0.5) {
-      keyAxis[0] = -1;
-    } else {
-      keyAxis[0] = 0;
-    }
-
-    if (joystick.value.y > 0.5) {
-      keyAxis[1] = -1;
-    } else if (joystick.value.y < -0.5) {
-      keyAxis[1] = 1;
-    } else {
-      keyAxis[1] = 0;
-    }
+  if (joystick1.active) {
+    keyAxis[0] = joystick1.value.x > 0.5 ? 1 : (joystick1.value.x < -0.5 ? -1 : 0);
+    keyAxis[1] = joystick1.value.y > 0.5 ? -1 : (joystick1.value.y < -0.5 ? 1 : 0);
+  } else {
+    keyAxis[0] = 0;
+    keyAxis[1] = 0;
   }
-  requestAnimationFrame(updateJoystick);
 }
 
-updateJoystick();
+function loop() {
+  requestAnimationFrame(loop);
+  updateJoystick();
+}
+
+loop();

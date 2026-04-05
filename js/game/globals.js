@@ -16,6 +16,3 @@ var camera,
     ballMesh,
     ballRadius = 0.25,
     gameState;
-
-// keyAxis is defined in input-handler.js but used here too. 
-// We'll declare it there and ensure it's global.
