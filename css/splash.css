@@ -65,18 +65,19 @@
 @keyframes moveDown {
   0% {
     top: 50%;
+    background: #07fff9 ;
   }
   50% {
     top: 40%;
   }
   100% {
     top: 100%;
+    background: #fff;
   }
 }
 
 @keyframes moveUp {
   0% {
-    background: #fff;
     top: 100%;
   }
   50% {
@@ -85,9 +86,8 @@
   }
   100% {
     top: 50%;
-    width: 60px;
-    height: 60px;
-    background: #FFF;
+    width: 68px;
+    height: 68px;
   }
 }
 
@@ -104,7 +104,13 @@
   0% {
     opacity: 1;
   }
-  100% {
+  30% {
+    opacity: 0;
+  }
+    50% {
+    opacity: 0.4;
+  }
+    100% {
     opacity: 0;
   }
 }
