@@ -53,21 +53,6 @@ function createPhysicsWorld() {
       }
     }
   };
-  setInterval(function () {
-    var velocity = wBall.GetLinearVelocity().Length();
-    if (velocity > 0.6 && !rolling) {
-      adjustSound(velocity);
-      playRollSound();
-      rolling = true;
-    } else if (velocity < 0.5 && rolling) {
-      stopRollSound();
-      rolling = false;
-    }
-  }, 100);
-  
-  if (rollSound) {
-    rollSound.addEventListener("ended", playRollSound);
-  }
   wWorld.SetContactListener(listener);
 }
 
