@@ -168,12 +168,12 @@ setTimeout(() => {
   joystickZone.style.pointerEvents = "auto";
 }, 3600);
 
-let joystick-gear = new JoystickController("stick-gear", 64, 8);
+let joystick1 = new JoystickController("stick1", 64, 8);
 
 function updateJoystick() {
-  if (joystick-gear.active) {
-    keyAxis[0] = joystick-gear.value.x > 0.5 ? 1 : (joystick-gear.value.x < -0.5 ? -1 : 0);
-    keyAxis[1] = joystick-gear.value.y > 0.5 ? -1 : (joystick-gear.value.y < -0.5 ? 1 : 0);
+  if (joystick1.active) {
+    keyAxis[0] = joystick1.value.x > 0.5 ? 1 : (joystick1.value.x < -0.5 ? -1 : 0);
+    keyAxis[1] = joystick1.value.y > 0.5 ? -1 : (joystick1.value.y < -0.5 ? 1 : 0);
   } else {
     keyAxis[0] = 0;
     keyAxis[1] = 0;
