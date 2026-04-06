@@ -31,14 +31,14 @@
   <img rel="preload" id="floor" class="hidden" src="img/concrete.webp" />
   <img rel="preload" id="brick" class="hidden" src="img/Brick.webp" />
 
-  <main id="game-ui" class="fixed inset-0 z-[1] flex flex-col justify-between items-center">
+  <main id="game-ui" class="fixed inset-0 z-20 flex flex-col justify-between items-center">
 
-    <header class="w-full flex items-center justify-between px-5 md:px-[30px] py-[10px] md:py-[15px] z-10">
+    <header class="w-full flex items-center justify-between px-5 md:px-[30px] py-[10px] md:py-[15px]">
       <div class="bg-black/30 border border-shamcyan/15 rounded-xl px-[15px] py-[5px] text-xl font-bold">
         <h2 id="level">Shamaze3D <span></span></h2>
       </div>
 
-      <div class="z-[11]">
+      <div>
         <button
           id="settings-button"
           class="bg-black/30 border border-shamcyan/15 backdrop-blur-[5px] rounded-xl px-[10px] py-[5px] m-[5px] cursor-pointer"
@@ -58,7 +58,7 @@
       </div>
     </header>
 
-    <div id="settings-modal" class="hidden fixed inset-0 z-[100] overflow-auto backdrop-blur-[8px] bg-black/40">
+    <div id="settings-modal" class=" fixed inset-0 z-40 overflow-auto backdrop-blur-[8px] bg-black/40">
       <div class="relative bg-[#0a0a0a] mx-auto my-[25px] p-[10px] w-[80%] max-w-[400px] rounded-xl border-none modal-shell">
 
         <button
@@ -111,7 +111,7 @@
 
   <div
     id="joystick-zone"
-    class="absolute bottom-[40px] w-[80vw] h-[80vh] z-10 touch-none opacity-0 pointer-events-none transition-opacity duration-300"
+    class="absolute bottom-[40px] w-[80vw] h-[80vh] z-30 touch-none opacity-0 pointer-events-none transition-opacity duration-300"
   >
     <div
       id="joystick-base"
