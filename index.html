@@ -15,10 +15,12 @@
         --color-shamblue: #007bff;
         --color-shamcyan: #07fff9;
         --color-shamtext: #e0e0e0;
+        --color-shambg: #0d1117;
+        --color-panelbg: #0a0a0a;
       }
     </style>
 </head>
-<body class="m-0 p-0 w-full h-full overflow-hidden flex items-center justify-center touch-none bg-[#0d1117] text-shamtext select-none">
+<body class="m-0 p-0 w-full h-full overflow-hidden flex items-center justify-center touch-none bg-shambg text-shamtext select-none">
 
   <canvas id="gameCanvas" class="fixed top-0 left-0 w-full h-full z-0"></canvas>
 
@@ -33,15 +35,15 @@
 
   <main id="game-ui" class="fixed inset-0 z-20 flex flex-col justify-between items-center">
 
-    <header class="w-full flex items-center justify-between px-5 md:px-[30px] py-[10px] md:py-[15px]">
-      <div class="bg-black/30 border border-shamcyan/15 rounded-xl px-[15px] py-[5px] text-xl font-bold">
+    <header class="w-full flex items-center justify-between px-5 md:px-8 py-4 md:py-8">
+      <div class="bg-black/30 border border-shamcyan/15 rounded-xl px-4 py-1 text-xl font-bold">
         <h2 id="level">Shamaze3D <span></span></h2>
       </div>
 
       <div>
         <button
           id="settings-button"
-          class="bg-black/30 border border-shamcyan/15 backdrop-blur-[5px] rounded-xl px-[10px] py-[5px] m-[5px] cursor-pointer"
+          class="bg-black/30 border border-shamcyan/15 backdrop-blur-sm rounded-xl px-2 py-1 m-1 cursor-pointer"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="35px" height="35px">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -58,36 +60,36 @@
       </div>
     </header>
 
-    <div id="settings-modal" class=" fixed inset-0 z-40 overflow-auto backdrop-blur-[8px] bg-black/40">
-      <div class="relative bg-[#0a0a0a] mx-auto my-[25px] p-[10px] w-[80%] max-w-[400px] rounded-xl border-none modal-shell">
+    <div id="settings-modal" class=" fixed inset-0 z-40 overflow-auto backdrop-blur-md bg-black/40">
+      <div class="relative bg-panelbg mx-auto my-6 p-3 w-xs rounded-xl border-none modal-shell">
 
         <button
           id="close-settings-button"
-          class="absolute top-0 right-[15px] bg-transparent border-none text-7xl font-bold text-shamcyan/20 cursor-pointer transition-all duration-200 rounded-[5px]"
+          class="absolute top-0 right-4 bg-transparent border-none text-7xl font-bold text-shamcyan/20 cursor-pointer transition-all duration-200 rounded-sm"
         >
           &times;
         </button>
 
-        <img src="img/bree.png" alt="Bree Logo" class="block mx-auto mt-[10px] w-[100px]" />
+        <img src="img/bree.png" alt="Bree Logo" class="block mx-auto mt-2 w-25" />
 
         <h1 class="text-center font-bold text-shamcyan text-3xl">
           Shamaze3D
         </h1>
 
-        <div class="bg-[#0a0a0a] border border-shamblue rounded-xl p-[5px] mb-[5px] text-center">
+        <div class="bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center">
           <h3 class="text-shamcyan text-xl">---&gt; High Score &lt;---</h3>
           <p class="text-sm text-shamtext font-sans">
             Current best: <span id="highScore"></span>
             <button
               id="resetBtn"
-              class="bg-shamcyan/10 border border-[rgba(100,200,255,0.18)] backdrop-blur-[5px] rounded-xl px-[10px] py-[5px] m-[5px] text-shamcyan/80 text-sm cursor-pointer hover:-translate-y-[2px]"
+              class="bg-shamcyan/10 border border-shamcyan/30 backdrop-blur-sm rounded-xl px-2 m-1 text-shamcyan/80 text-sm cursor-pointer hover:-translate-y-0.5"
             >
               Reset
             </button>
           </p>
         </div>
 
-        <div class="bg-[#0a0a0a] border border-shamblue rounded-[10px] p-[5px] mb-[5px] text-center">
+        <div class="bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center">
           <h3 class="text-shamcyan text-xl">---&gt; How to Play &lt;---</h3>
           <p class="text-sm text-shamtext font-sans">➣ Use virtual joystick to control the ball</p>
           <p class="text-sm text-shamtext font-sans">➣ keyboard W⬆️ A⬅️ S⬇️ D➡️ keys</p>
@@ -95,7 +97,7 @@
           <p class="text-xs text-shamtext font-sans"><span class="font-bold">Navigate the maze and find the exit.</span></p>
         </div>
 
-        <div class="bg-[#0a0a0a] border border-shamblue rounded-[10px] p-[5px] mb-[5px] text-center">
+        <div class="bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center">
           <h3 class="text-shamcyan text-xl">---&gt; About &lt;---</h3>
           <p class="text-sm text-shamtext font-sans">Shamaze3D V4.3.1</p>
           <p class="text-sm text-shamtext font-sans">
@@ -111,16 +113,16 @@
 
   <div
     id="joystick-zone"
-    class="absolute bottom-[40px] w-[80vw] h-[80vh] z-30 touch-none opacity-0 pointer-events-none transition-opacity duration-300"
+    class="absolute bottom-10 w-4/5 h-[80vh] z-30 touch-none opacity-0 pointer-events-none transition-opacity duration-300"
   >
     <div
       id="joystick-base"
-      class="absolute w-[128px] h-[128px] right-[50px] bottom-[80px]"
+      class="absolute w-32 h-32 right-12 bottom-20"
     >
-      <img src="img/joystick-base.webp" class="w-[128px] h-[128px] pointer-events-none" />
+      <img src="img/joystick-base.webp" class="w-32 h-32 pointer-events-none" />
 
-      <div id="stick1" class="absolute left-[33px] top-[30px]">
-        <img src="img/joystick-blue.svg" class="w-[64px] h-[64px] pointer-events-none" />
+      <div id="stick1" class="absolute left-8 top-7">
+        <img src="img/joystick-blue.svg" class="w-16 h-16 pointer-events-none" />
       </div>
     </div>
   </div>
