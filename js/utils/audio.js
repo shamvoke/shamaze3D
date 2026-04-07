@@ -1,6 +1,3 @@
-/**
- * Audio handling for Shamaze3D.
- */
 var playStartSound = function () {
   var e = document.getElementById("start");
   var joystickZone = document.getElementById("joystick-zone");
