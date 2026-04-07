@@ -108,7 +108,7 @@ function updateRenderWorld() {
  * Handles window resize events.
  */
 function onResize() {
-    var dpr = Math.min(window.devicePixelRatio || 1, 3);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     renderer.setSize(window.innerWidth * dpr, window.innerHeight * dpr, false);
     renderer.domElement.style.width = window.innerWidth + "px";
