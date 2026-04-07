@@ -70,7 +70,7 @@ function gameLoop() {
 
 // Initialization on document ready
 $(document).ready(function () {
-    var dpr = Math.min(window.devicePixelRatio || 1, 3);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
     const canvas = document.getElementById('gameCanvas');
     if (!canvas) return;
 
