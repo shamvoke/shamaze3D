@@ -164,19 +164,28 @@ class JoystickController {
 
 let joystick = new JoystickController("stick-gear", 64, 8);
 
+/**
+ * Polls the joystick value and updates the global keyAxis.
+ */
 function updateJoystick() {
   if (joystick.active) {
-    keyAxis[0] = joystick.value.x > 0.5 ? 1 : (joystick.value.x < -0.5 ? -1 : 0);
-    keyAxis[1] = joystick.value.y > 0.5 ? -1 : (joystick.value.y < -0.5 ? 1 : 0);
-  } else {
-    keyAxis[0] = 0;
-    keyAxis[1] = 0;
+    if (joystick.value.x > 0.5) {
+      keyAxis[0] = 1;
+    } else if (joystick.value.x < -0.5) {
+      keyAxis[0] = -1;
+    } else {
+      keyAxis[0] = 0;
+    }
+
+    if (joystick.value.y > 0.5) {
+      keyAxis[1] = -1;
+    } else if (joystick.value.y < -0.5) {
+      keyAxis[1] = 1;
+    } else {
+      keyAxis[1] = 0;
+    }
   }
+  requestAnimationFrame(updateJoystick);
 }
 
-function loop() {
-  requestAnimationFrame(loop);
-  updateJoystick();
-}
-
-loop();
+updateJoystick();
