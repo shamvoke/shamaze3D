@@ -162,12 +162,6 @@ class JoystickController {
   }
 }
 
-setTimeout(() => {
-  const joystickZone = document.getElementById("joystick-zone");
-  joystickZone.style.opacity = "1";
-  joystickZone.style.pointerEvents = "auto";
-}, 3600);
-
 let joystick = new JoystickController("stick-gear", 64, 8);
 
 function updateJoystick() {
