@@ -58,28 +58,3 @@ window.addEventListener("click", (event) => {
         toggleJoystick(true);
     }
 });
-
-/**
- * jQuery helper to center elements.
- */
-(jQuery.fn.centerv = function () {
-  return (
-    (wh = window.innerHeight),
-    (h = this.outerHeight()),
-    this.css("position", "absolute"),
-    this.css("top", Math.max(0, (wh - h) / 2) + "px"),
-    this
-  );
-}),
-  (jQuery.fn.centerh = function () {
-    return (
-      (ww = window.innerWidth),
-      (w = this.outerWidth()),
-      this.css("position", "absolute"),
-      this.css("left", Math.max(0, (ww - w) / 2) + "px"),
-      this
-    );
-  }),
-  (jQuery.fn.center = function () {
-    return this.centerv(), this.centerh(), this;
-  });
