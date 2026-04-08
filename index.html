@@ -18,20 +18,23 @@
         --color-shambg: #0d1117;
         --color-panelbg: #0a0a0a;
       }
+      .card {
+        @apply bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center;
+      }
     </style>
 </head>
 <body class="m-0 p-0 w-screen h-screen overflow-hidden flex items-center justify-center touch-none bg-shambg text-white select-none">
 
-  <canvas id="gameCanvas" class="fixed top-0 left-0 w-full h-full z-0"></canvas>
+  <canvas id="gameCanvas" class="fixed inset-0 w-full h-full z-0 pointer-events-none"></canvas>
 
   <div class="welcome">
     <span id="splash-overlay" class="splash"></span>
     <span id="welcome" class="z-60"></span>
   </div>
 
-  <img rel="preload" id="ball" class="hidden" src="img/ball.webp" />
-  <img rel="preload" id="floor" class="hidden" src="img/concrete.webp" />
-  <img rel="preload" id="brick" class="hidden" src="img/Brick.webp" />
+  <img id="ball" class="hidden" src="img/ball.webp" />
+  <img id="floor" class="hidden" src="img/concrete.webp" />
+  <img id="brick" class="hidden" src="img/Brick.webp" />
 
   <main id="game-ui" class="fixed top-0 inset-x-0 z-20 flex flex-col justify-between items-center">
 
@@ -44,6 +47,7 @@
         <button
           id="settings-button"
           class="bg-black/30 border border-shamcyan/15 backdrop-blur-sm rounded-xl px-2 py-1 m-1 cursor-pointer"
+          aria-label="Settings button."
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +65,7 @@
       </div>
     </header>
 
-    <div id="settings-modal" class="hidden fixed inset-0 z-40 overflow-auto backdrop-blur-sm pt-20">
+    <div id="settings-modal" class="hidden fixed inset-0 z-40 overflow-auto pt-20">
       <div class="relative bg-panelbg/90 mx-auto my-6 p-3 w-xs rounded-xl border-none modal-shell">
 
         <button
@@ -77,7 +81,7 @@
           Shamaze3D
         </h1>
 
-        <div class="bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center">
+        <div class="card">
           <h3 class="text-shamcyan text-xl font-bold">---&gt; High Score &lt;---</h3>
           <p>
             Current best: <span id="highScore"></span>
@@ -90,7 +94,7 @@
           </p>
         </div>
 
-        <div class="bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center text-sm block">
+        <div class="card text-sm block">
           <h3 class="text-shamcyan text-xl font-bold">---&gt; How to Play &lt;---</h3>
           <p>🏐 Virtual joystick to control the ball 🏐</p>
           <p>🏐  keyboard W▲ A◀ S▼ D▶ keys  🏐</p>
@@ -98,7 +102,7 @@
           <p class="text-xs"><span>⟢ Navigate the maze and find the exit ⟢</span></p>
         </div>
 
-        <div class="bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center">
+        <div class="card">
           <h3 class="text-shamcyan text-xl font-bold">---&gt; About &lt;---</h3>
           <p>Shamaze3D V4.6.1</p>
           <p class="text-sm">
