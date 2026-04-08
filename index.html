@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="A 3D maze game that will test your sense of direction." />
-    <meta name="author" content="Sham" />
+    <meta name="description" content="A 3D maze game that will test your sense of direction. Find your way out, or get lost in the fun" />
+    <meta name="author" content="Sham voke" />
     <meta name="keywords" content="Sham Maze 3D, Maze Game, 3D Game" />
     <link rel="stylesheet" href="css/splash.css">
     <link rel="stylesheet" href="css/style.css"/>
@@ -20,20 +20,20 @@
       }
     </style>
 </head>
-<body class="m-0 p-0 w-full h-full overflow-hidden flex items-center justify-center touch-none bg-shambg text-shamtext select-none">
+<body class="m-0 p-0 w-screen h-screen overflow-hidden flex items-center justify-center touch-none bg-shambg text-shamtext select-none">
 
   <canvas id="gameCanvas" class="fixed top-0 left-0 w-full h-full z-0"></canvas>
 
   <div class="welcome">
     <span id="splash-overlay" class="splash"></span>
-    <span id="welcome" class="z-depth-4"></span>
+    <span id="welcome" class="z-60"></span>
   </div>
 
   <img rel="preload" id="ball" class="hidden" src="img/ball.webp" />
   <img rel="preload" id="floor" class="hidden" src="img/concrete.webp" />
   <img rel="preload" id="brick" class="hidden" src="img/Brick.webp" />
 
-  <main id="game-ui" class="fixed inset-0 z-20 flex flex-col justify-between items-center">
+  <main id="game-ui" class="fixed top-0 inset-x-0 z-20 flex flex-col justify-between items-center">
 
     <header class="w-full flex items-center justify-between px-5 md:px-8 py-4 md:py-8">
       <div class="bg-black/30 border border-shamcyan/15 rounded-xl px-4 py-1 text-xl font-bold">
