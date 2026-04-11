@@ -11,21 +11,14 @@
     <title>Sham Maze 3D</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
-      @theme {
-        --color-shamblue: #007bff;
-        --color-shamcyan: #07fff9;
-        --color-shamtext: #e0e0e0;
-        --color-shambg: #0d1117;
-        --color-panelbg: #0a0a0a;
-      }
       .card {
         @apply bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center;
       }
     </style>
 </head>
-<body class="m-0 p-0 w-screen h-screen overflow-hidden flex items-center justify-center touch-none bg-shambg text-white select-none">
+<body>
 
-  <canvas id="gameCanvas" class="fixed inset-0 w-full h-full z-0 pointer-events-none"></canvas>
+  <canvas id="gameCanvas"></canvas>
 
   <div class="welcome">
     <span id="splash-overlay" class="splash"></span>
@@ -36,24 +29,22 @@
   <img id="floor" class="hidden" src="img/concrete.webp" />
   <img id="brick" class="hidden" src="img/Brick.webp" />
 
-  <main id="game-ui" class="fixed top-0 inset-x-0 z-20 flex flex-col justify-between items-center">
+  <main id="game-ui">
 
-    <header class="w-full flex items-center justify-between px-5 md:px-8 py-4 md:py-8">
-      <div class="bg-black/30 border border-shamcyan/15 rounded-xl px-2 py-1 text-xl font-bold">
+    <header>
+      <div class="logo">
         <h2 id="level">Shamaze3D <span></span></h2>
       </div>
 
       <div>
         <button
           id="settings-button"
-          class="bg-black/30 border border-shamcyan/15 backdrop-blur-sm rounded-xl px-2 py-1 m-1 cursor-pointer"
           aria-label="Settings button."
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="h-8 w-8"
           >
             <path
               fill-rule="evenodd"
@@ -65,51 +56,49 @@
       </div>
     </header>
 
-    <div id="settings-modal" class="hidden fixed inset-0 z-40 overflow-auto pt-20">
-      <div class="relative bg-panelbg/90 mx-auto my-6 p-3 w-xs rounded-xl border-none modal-shell">
+    <div id="settings-modal">
+      <div class="modal-shell">
 
         <button
           id="close-settings-button"
-          class="absolute top-0 right-4 text-6xl font-bold text-shamcyan/40 cursor-pointer  rounded-sm"
         >
           &times;
         </button>
 
-        <img src="img/bree.png" alt="Bree Logo" class="block mx-auto mt-2 w-25" />
+        <img src="img/bree.png" alt="Bree Logo"/>
 
-        <h1 class="text-center font-bold text-shamcyan text-3xl">
+        <h1>
           Shamaze3D
         </h1>
 
         <div class="card">
-          <h3 class="text-shamcyan text-xl font-bold">---&gt; High Score &lt;---</h3>
+          <h3>---&gt; High Score &lt;---</h3>
           <p>
             Current best: <span id="highScore"></span>
             <button
               id="resetBtn"
-              class="bg-shamcyan/10 border border-shamcyan/30 rounded-xl px-4 m-1 text-shamcyan/80 text-sm cursor-pointer hover:-translate-y-0.5"
             >
               Reset
             </button>
           </p>
         </div>
 
-        <div class="card text-sm block">
-          <h3 class="text-shamcyan text-xl font-bold">---&gt; How to Play &lt;---</h3>
+        <div class="card info">
+          <h3>---&gt; How to Play &lt;---</h3>
           <p>🏐 Virtual joystick to control the ball 🏐</p>
           <p>🏐  keyboard W▲ A◀ S▼ D▶ keys  🏐</p>
           <p>🏐 Gamepad & keyboard Arrow keys 🏐</p>
-          <p class="text-xs"><span>⟢ Navigate the maze and find the exit ⟢</span></p>
+          <p class="text-sm"><span>⟢ Navigate the maze and find the exit ⟢</span></p>
         </div>
 
         <div class="card">
-          <h3 class="text-shamcyan text-xl font-bold">---&gt; About &lt;---</h3>
+          <h3>---&gt; About &lt;---</h3>
           <p>Shamaze3D V4.6.1</p>
-          <p class="text-sm">
+          <p>
             Crafted with 💙 by
-            <a href="https://shamvoke.com" target="_blank" class="hover:text-shamcyan font-bold no-underline">Sham Voke</a>
+            <a href="https://shamvoke.com" target="_blank">Sham Voke</a>
           </p>
-          <p class="text-xs font-bold">⟢ Stay tuned for updates! ⟢</p>
+          <p class="text-sm">⟢ Stay tuned for updates! ⟢</p>
         </div>
 
       </div>
@@ -118,16 +107,14 @@
 
   <div
     id="joystick-zone"
-    class="absolute bottom-10 w-4/5 h-[80vh] z-30 touch-none opacity-0 pointer-events-none transition-opacity duration-300"
   >
     <div
       id="joystick-base"
-      class="absolute w-32 h-32 right-12 bottom-20"
     >
-      <img src="img/joystick-base.webp" class="w-32 h-32 pointer-events-none" />
+      <img src="img/joystick-base.webp" />
 
-      <div id="stick-gear" class="absolute left-8 top-7.5">
-        <img src="img/joystick-blue.svg" class="w-16 h-16 pointer-events-none" />
+      <div id="stick-gear" >
+        <img src="img/joystick-blue.svg" />
       </div>
     </div>
   </div>
