@@ -7,14 +7,9 @@
     <meta name="author" content="Sham voke" />
     <meta name="keywords" content="Sham Maze 3D, Maze Game, 3D Game" />
     <link rel="stylesheet" href="css/splash.css">
+    <link rel="stylesheet" href="css/tailwind.css">
     <link rel="stylesheet" href="css/style.css"/>
     <title>Sham Maze 3D</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      .card {
-        @apply bg-panelbg border border-shamblue rounded-xl p-1 mb-1 text-center;
-      }
-    </style>
 </head>
 <body>
 
@@ -22,12 +17,12 @@
 
   <div class="welcome">
     <span id="splash-overlay" class="splash"></span>
-    <span id="welcome" class="z-60"></span>
+    <span id="welcome"></span>
   </div>
 
-  <img id="ball" class="hidden" src="img/ball.webp" />
-  <img id="floor" class="hidden" src="img/concrete.webp" />
-  <img id="brick" class="hidden" src="img/Brick.webp" />
+  <img id="ball" class="texture" src="img/ball.webp" />
+  <img id="floor" class="texture" src="img/concrete.webp" />
+  <img id="brick" class="texture" src="img/Brick.webp" />
 
   <main id="game-ui">
 
