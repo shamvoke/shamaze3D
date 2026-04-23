@@ -166,9 +166,10 @@ let joystick = new JoystickController("stick-gear", 64, 8);
 
 /**
  * Polls the joystick value and updates the global keyAxis.
+ * Only active when keyboard is not in use.
  */
 function updateJoystick() {
-  if (joystick.active) {
+  if (joystick.active && !keyboardActive) {
     if (joystick.value.x > 0.5) {
       keyAxis[0] = 1;
     } else if (joystick.value.x < -0.5) {
