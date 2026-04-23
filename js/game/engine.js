@@ -20,7 +20,7 @@ function gameLoop() {
         light.position.set(1, 1, 9),
         (light.intensity = 0);
       var e = Math.floor((mazeDimension - 1) / 2 - 4);
-      $("#level").html("Level: " + e);
+      document.getElementById("level").innerHTML = "Level: " + e;
       var highScore = localStorage.getItem("highScore");
       if (highScore === null) {
         highScore = e;
@@ -31,7 +31,7 @@ function gameLoop() {
         }
       }
       localStorage.setItem("highScore", highScore);
-      $("#highScore").html("Level " + highScore);
+      document.getElementById("highScore").innerHTML = "Level " + highScore;
       gameState = "fade in";
       break;
     case "fade in":
@@ -69,7 +69,7 @@ function gameLoop() {
 }
 
 // Initialization on document ready
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     const canvas = document.getElementById('gameCanvas');
     if (!canvas) return;
@@ -86,7 +86,7 @@ $(document).ready(function () {
         KeyboardJS.bind.axis("a", "d", "s", "w", onMoveKey);
     }
 
-    $(window).resize(onResize);
+    window.addEventListener("resize", onResize);
 
     // Start the game
     gameState = "initialize";

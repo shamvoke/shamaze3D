@@ -30,7 +30,7 @@ function confirmReset(event) {
  */
 function resetHighScore() {
   localStorage.removeItem("highScore");
-  $("#highScore").html("High Score cleared!");
+  document.getElementById("highScore").innerHTML = "High Score cleared!";
 }
 
 // Event Listeners
