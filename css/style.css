@@ -11,12 +11,6 @@
   --panelbg: #0a0a0a;
 }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -24,6 +18,39 @@ body {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
+}
+
+/* Base reset (replaces Tailwind base layer) */
+html {
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  text-transform: none;
+}
+
+::-webkit-appearance {
+  appearance: none;
 }
 
 body {
