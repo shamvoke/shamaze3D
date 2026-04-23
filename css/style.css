@@ -6,7 +6,6 @@
 :root {
   --shamblue: #007bff;
   --shamcyan: #07fff9;
-  --shamtext: #e0e0e0;
   --shambg: #0d1117;
   --panelbg: #0a0a0a;
 }
@@ -63,8 +62,7 @@ body {
   justify-content: center;
   background: var(--shambg);
   color: white;
-  user-select: none;
-  touch-action: none; 
+  touch-action: none;
 }
 
 .texture {
@@ -116,8 +114,7 @@ header {
   padding: 0.25rem 0.5rem;
   margin: 0.25rem; 
   border-radius: 0.75rem; 
-  border-width: 1px; 
-  cursor: pointer; 
+  border-width: 1px;
   backdrop-blur: blur(4px); 
 }
 
@@ -207,12 +204,10 @@ header {
   padding: 0.2rem 0.9rem;
   margin: 0.4rem;
   font-size: 0.75rem;
-  cursor: pointer;
 }
 
 .card a {
   color: var(--shamcyan);
-  text-decoration: none;
   border-bottom: 1px dashed rgba(125, 249, 255, 0.4);
 }
 
@@ -227,8 +222,7 @@ header {
   width: 80%; 
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms; 
-  transition-duration: 300ms; 
+  transition-duration: 300ms;
   pointer-events: none; 
   touch-action: none; 
   opacity: 0; 
