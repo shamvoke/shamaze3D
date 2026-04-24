@@ -4,11 +4,11 @@
  */
 
 var ballImage = new Image();
-ballImage.src = document.getElementById("ball").src;
+ballImage.src = 'img/ball.webp';
 var floorImage = new Image();
-floorImage.src = document.getElementById("floor").src;
+floorImage.src = 'img/concrete.webp';
 var brickImage = new Image();
-brickImage.src = document.getElementById("brick").src;
+brickImage.src = 'img/Brick.webp';
 
 var ballTexture = new THREE.Texture(ballImage);
 var floorTexture = new THREE.Texture(floorImage);
